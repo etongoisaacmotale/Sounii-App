@@ -1,0 +1,17 @@
+.mobile-layout .content {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.desktop-layout .content {
+  padding: 20px;
+}
+
+.desktop-layout {
+  font-family: 'Poppins', sans-serif;
+}
+.mobile-layout {
+  font-family: 'Poppins', sans-serif;
+}
+

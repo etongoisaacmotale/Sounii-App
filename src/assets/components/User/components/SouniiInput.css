@@ -1,0 +1,36 @@
+/* SouniiInput.css */
+.input-container {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+}
+
+.sounii-input {
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 2px solid orange;
+  background-color: #000;
+  color: orange;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.sounii-input::placeholder {
+  color: #ffb84d;
+}
+
+.sounii-input:focus {
+  border-color: #ff9900;
+  background-color: #111;
+}
+
+.sounii-input.error {
+  border-color: red;
+}
+
+.error-text {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+}

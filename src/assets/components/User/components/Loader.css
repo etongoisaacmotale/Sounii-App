@@ -1,0 +1,23 @@
+/* SouniiLoader.css */
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* height: 100vh; */ /* remove full screen */
+  padding: 5px 0; /* optional small padding */
+}
+
+.sounii-loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid orange;
+  border-radius: 50%;
+  width: 35px;  /* smaller */
+  height: 35px; /* smaller */
+  animation: spin 0.7s linear infinite;
+}
+
+/* Spin animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

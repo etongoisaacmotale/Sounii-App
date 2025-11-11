@@ -1,0 +1,65 @@
+.register-screen-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    min-height: 100vh;
+    background-color: #111;
+    color: orange;
+}
+
+.register-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: orange;
+}
+
+.login-text {
+    font-size: 14px;
+    color: #ffb84d;
+    margin-top: 15px;
+}
+
+.login-text span {
+    color: orange;
+    cursor: pointer;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+
+.login-text span:hover {
+    color: #ff9900;
+}
+
+.social-login-wrapper {
+    width: 100%;
+    max-width: 400px;
+    margin-top: 20px;
+}
+
+.divider {
+    text-align: center;
+    margin: 15px 0;
+    font-size: 14px;
+    color: #ffb84d;
+}
+
+.login-text {
+  margin-top: 20px;
+  text-align: center;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.login-link {
+  color: orange;
+  font-weight: bold;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.login-link:hover {
+  color: black;
+  text-decoration: underline;
+}

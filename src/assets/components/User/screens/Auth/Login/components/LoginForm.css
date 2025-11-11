@@ -1,0 +1,88 @@
+/* LoginForm.css */
+.login-form-container {
+  background-color: #000;
+  color: orange;
+  border-radius: 12px;
+  padding: 25px 20px;
+  width: 90%;          /* take most of the screen width on small devices */
+  max-width: 350px;    /* restrict max width on larger screens */
+  margin: 40px auto;   /* center horizontally and add vertical spacing */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  box-sizing: border-box;
+}
+
+.login-title {
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.error-text {
+  color: red;
+  font-size: 14px;
+  margin: 10px 0;
+}
+
+.login-footer {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #ffb84d;
+}
+
+.signup-link {
+  color: orange;
+  cursor: pointer;
+  font-weight: bold;
+  transition: color 0.2s ease-in-out;
+}
+
+.signup-link:hover {
+  color: #ff9900;
+}
+
+.forgot-password-link {
+  color: #6c63ff;
+  font-size: 0.9rem;
+  text-align: right;
+  margin-top: 4px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.forgot-password-link:hover {
+  color: #4b47cc;
+  text-decoration: underline;
+}
+
+/* Ensure inputs inside form have spacing and fit smaller screens */
+.login-form-container input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Media queries for very small screens */
+@media (max-width: 400px) {
+  .login-form-container {
+    padding: 20px 15px;
+    margin: 20px auto;
+  }
+
+  .login-title {
+    font-size: 20px;
+  }
+
+  .login-footer {
+    font-size: 13px;
+  }
+
+  .forgot-password-link {
+    font-size: 0.8rem;
+  }
+}

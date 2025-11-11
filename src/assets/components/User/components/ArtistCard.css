@@ -1,0 +1,61 @@
+/* ArtistCard.css */
+.artist-card {
+  display: flex;
+  align-items: center;
+  background-color: #000;
+  color: orange;
+  border-radius: 12px;
+  padding: 10px 15px;
+  margin: 10px 0;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.artist-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 10px rgba(0,0,0,0.5);
+}
+
+.artist-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+.artist-info {
+  flex-grow: 1;
+}
+
+.artist-name {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.artist-followers {
+  margin: 2px 0 0;
+  font-size: 14px;
+  color: #ffb84d;
+}
+
+.follow-btn {
+  background-color: orange;
+  color: black;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.follow-btn:hover {
+  background-color: #ff9900;
+}
+
+.follow-btn:active {
+  background-color: #ffb84d;
+  transform: scale(0.95);
+}

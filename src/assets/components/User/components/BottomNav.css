@@ -1,0 +1,44 @@
+/* BottomNav.css */
+.bottom-nav-container {
+  width: 100%;
+  height: 60px;
+  background-color: #000;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  z-index: 1000;
+  box-shadow: 0 -2px 5px rgba(0,0,0,0.5);
+}
+
+.nav-btn {
+  background-color: transparent;
+  border: none;
+  color: orange;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 14px;
+  cursor: pointer;
+  transition: color 0.2s, transform 0.1s;
+}
+
+.nav-btn .nav-icon {
+  font-size: 20px;
+  margin-bottom: 2px;
+}
+
+.nav-btn:hover {
+  color: #ff9900;
+}
+
+.nav-btn:active {
+  color: #ffb84d;
+  transform: scale(0.95);
+}
+
+.nav-btn.active {
+  color: orange;
+  font-weight: bold;
+}

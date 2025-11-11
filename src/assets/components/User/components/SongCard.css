@@ -1,0 +1,38 @@
+.song-card {
+  display: flex;
+  align-items: center;
+  background-color: #000;
+  color: orange;
+  border-radius: 12px;
+  padding: 10px 15px;
+  margin: 10px 0;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.song-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 10px rgba(0,0,0,0.5);
+}
+
+.song-cover { width: 60px; height: 60px; border-radius: 8px; object-fit: cover; margin-right: 15px; }
+
+.song-info { flex-grow: 1; }
+
+.song-title { margin: 0; font-size: 16px; font-weight: bold; }
+
+.song-artist { margin: 2px 0 0; font-size: 14px; color: #ffb84d; }
+
+.play-btn {
+  background-color: orange;
+  color: black;
+  border: none;
+  border-radius: 50%;
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.play-btn:hover { background-color: #ff9900; }
+.play-btn:active { background-color: #ffb84d; transform: scale(0.95); }

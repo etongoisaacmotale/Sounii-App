@@ -1,0 +1,75 @@
+/* SouniiRegisterForm.css */
+.register-form-container {
+  width: 90%;             /* Take most of the screen width on small devices */
+  max-width: 400px;       /* Restrict width on larger screens */
+  margin: 50px auto;      /* Center horizontally and add vertical spacing */
+  background: #000;
+  color: white;
+  border-radius: 12px;
+  padding: 30px 20px;     /* Reduce horizontal padding on small screens */
+  box-shadow: 0 0 10px rgba(255, 165, 0, 0.3);
+  box-sizing: border-box; /* Include padding in width */
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+}
+
+.register-title {
+  color: orange;
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.error-text {
+  color: red;
+  font-size: 14px;
+  margin: 8px 0;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+form input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #aaa;
+}
+
+.login-link span {
+  color: orange;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+}
+
+.login-link span:hover {
+  color: #ffb84d;
+}
+
+/* Responsive adjustments for very small screens */
+@media (max-width: 400px) {
+  .register-form-container {
+    padding: 25px 15px;
+    margin: 30px auto;
+  }
+
+  .register-title {
+    font-size: 20px;
+  }
+
+  .login-link {
+    font-size: 13px;
+  }
+}
