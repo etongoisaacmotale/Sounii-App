@@ -1,23 +1,26 @@
-// LoginScreen.jsx
 import React, { Component } from "react";
 import { withRouter } from "../../../HOC/withRouter";
 import "./LoginScreen.css";
 import LoginForm from "./components/LoginForm";
 import SouniiSocialLoginButtons from "./components/SouniiSocialLoginButtons";
-import { AuthContext } from "../../../context/AuthContext";
 
 class LoginScreen extends Component {
-  static contextType = AuthContext; // Access AuthContext
+  handleLogin = (emailOrPhone, password) => {
+    const storedUser = JSON.parse(localStorage.getItem("souniiUser"));
 
-  handleLogin = async (emailOrPhone, password) => {
-    const { login } = this.context;
+    if (!storedUser) {
+      alert("No account found. Please register first.");
+      return;
+    }
 
-    try {
-      await login(emailOrPhone, password);
-      alert("Login successful!");
-      if (this.props.navigate) this.props.navigate("/home"); // navigate to home after login
-    } catch (error) {
-      alert(error.message);
+    if (
+      (storedUser.email === emailOrPhone || storedUser.phone === emailOrPhone) &&
+      storedUser.password === password
+    ) {
+      alert(`Welcome back, ${storedUser.name}!`);
+      if (this.props.navigate) this.props.navigate("/home");
+    } else {
+      alert("Invalid credentials. Please try again.");
     }
   };
 
@@ -30,13 +33,11 @@ class LoginScreen extends Component {
       <div className="login-screen-container">
         <h1 className="login-title">Welcome to Sounii</h1>
 
-        {/* Login Form */}
         <LoginForm
           onLogin={this.handleLogin}
           onSignup={this.handleSignupRedirect}
         />
 
-        {/* Social Login */}
         <div className="social-login-wrapper">
           <p className="divider">OR</p>
           <SouniiSocialLoginButtons

@@ -1,0 +1,5 @@
+/* profile.css */
+body {
+  scroll-behavior: smooth;
+  background: linear-gradient(to right, black, white, orange);
+}

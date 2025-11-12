@@ -5,21 +5,15 @@ import "./RegisterScreen.css";
 import SouniiRegisterForm from "./components/SouniiRegisterForm";
 import TermsCheckbox from "./components/TermsCheckbox";
 import SouniiSocialLoginButtons from "../Login/components/SouniiSocialLoginButtons";
-import { AuthContext } from "../../../context/AuthContext";
 
 class RegisterScreen extends Component {
-  static contextType = AuthContext;
-
-  state = {
-    agreed: false,
-  };
+  state = { agreed: false };
 
   handleAgreementChange = () => {
     this.setState({ agreed: !this.state.agreed });
   };
 
   handleRegister = async (formData) => {
-    const { register } = this.context;
     const { agreed } = this.state;
 
     if (!agreed) {
@@ -27,12 +21,25 @@ class RegisterScreen extends Component {
       return;
     }
 
+    const { name, email, phone, password } = formData;
+
+    if (!name || !email || !phone || !password) {
+      alert("Please fill in all fields");
+      return;
+    }
+
     try {
-      const user = await register(formData);
-      alert(`Welcome, ${user.name}! Your account has been created.`);
+      // Simulate delay for UX consistency
+      await new Promise((resolve) => setTimeout(resolve, 800));
+
+      // Save user locally
+      const newUser = { name, email, phone, password };
+      localStorage.setItem("user", JSON.stringify(newUser));
+
+      alert(`Welcome, ${name}! Your account has been created.`);
       if (this.props.navigate) this.props.navigate("/home");
     } catch (error) {
-      alert(error.message);
+      alert("Something went wrong. Please try again.");
     }
   };
 
@@ -42,8 +49,10 @@ class RegisterScreen extends Component {
 
   render() {
     return (
-      <div className="register-screen-container">
-        <h1 className="register-title">Create Your Sounii Account</h1>
+      <div className="register-screen-container p-8 flex flex-col items-center">
+        <h1 className="register-title text-3xl font-bold mb-6">
+          Create Your Sounii Account
+        </h1>
 
         <SouniiRegisterForm onRegister={this.handleRegister} />
 
@@ -53,8 +62,8 @@ class RegisterScreen extends Component {
           label="I agree to the Sounii Terms & Conditions"
         />
 
-        <div className="social-login-wrapper">
-          <p className="divider">OR</p>
+        <div className="social-login-wrapper mt-6 w-full max-w-sm text-center">
+          <p className="divider mb-2">OR</p>
           <SouniiSocialLoginButtons
             onGoogleLogin={() => alert("Google signup clicked")}
             onFacebookLogin={() => alert("Facebook signup clicked")}

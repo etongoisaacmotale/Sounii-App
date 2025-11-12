@@ -7,18 +7,15 @@ import { withRouter } from '../../../../HOC/withRouter';
 import Loader from '../../../../components/Loader';
 
 class SouniiRegisterForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: '',
-      email: '',
-      phone: '',
-      password: '',
-      confirmPassword: '',
-      error: '',
-      loading: false,
-    };
-  }
+  state = {
+    name: '',
+    email: '',
+    phone: '',
+    password: '',
+    confirmPassword: '',
+    error: '',
+    loading: false,
+  };
 
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
@@ -28,7 +25,7 @@ class SouniiRegisterForm extends Component {
     e.preventDefault();
     const { name, email, phone, password, confirmPassword } = this.state;
 
-    // Require either email or phone
+    // Validate fields
     if (!name || (!email && !phone) || !password || !confirmPassword) {
       this.setState({ error: 'Please fill in all required fields' });
       return;
@@ -43,14 +40,16 @@ class SouniiRegisterForm extends Component {
 
     // Simulate async registration
     setTimeout(() => {
+      // Save user locally
       const user = { name, email, phone, password };
       localStorage.setItem('souniiUser', JSON.stringify(user));
 
       this.setState({ loading: false });
       alert(`Account created for ${name} (${email || phone})`);
 
+      // Redirect to login
       if (this.props.navigate) this.props.navigate("/login");
-    }, 1000);
+    }, 800);
   };
 
   handleLoginLink = () => {

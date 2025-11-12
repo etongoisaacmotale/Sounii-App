@@ -1,0 +1,70 @@
+.song-card {
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  border-radius: 1rem; /* rounded-2xl */
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.song-card:hover {
+  transform: scale(1.05);
+}
+
+.song-card img {
+  width: 128px; /* 32 Tailwind units */
+  height: 128px;
+  border-radius: 0.75rem; /* rounded-xl */
+  margin-bottom: 12px;
+  object-fit: cover;
+  border: 2px solid #ff7f00; /* orange border */
+}
+
+.song-card h3 {
+  font-weight: 600;
+  color: #fff;
+  font-size: 1.125rem; /* text-lg */
+  margin-bottom: 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.song-card p {
+  font-size: 0.875rem; /* text-sm */
+  color: #d1d1d1; /* gray-300 */
+  margin-bottom: 12px;
+}
+
+.song-card button {
+  margin-top: 8px;
+  padding: 8px 24px;
+  font-weight: bold;
+  border-radius: 9999px; /* rounded-full */
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-size: 0.9rem;
+}
+
+/* Default button */
+.song-card button.default {
+  background-color: #ff7f00;
+  color: #000;
+}
+
+.song-card button.default:hover {
+  background-color: #e67300; /* slightly darker orange on hover */
+}
+
+/* Playing state */
+.song-card button.playing {
+  background-color: #e67300;
+  color: #000;
+}

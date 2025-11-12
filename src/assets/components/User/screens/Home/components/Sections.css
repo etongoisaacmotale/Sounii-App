@@ -1,0 +1,50 @@
+/* Section container */
+.section-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Section title */
+.section-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #ff7f00;
+  margin-bottom: 15px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+}
+
+/* Horizontal scroll container for RecommendedSection */
+.song-scroll-container {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+/* Hide default scrollbar */
+.song-scroll-container::-webkit-scrollbar {
+  display: none;
+}
+.song-scroll-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Grid layout for TrendingSection */
+.song-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 15px;
+}
+
+/* Optional: smooth fade-in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.section-container .song-card {
+  animation: fadeIn 0.5s ease forwards;
+}

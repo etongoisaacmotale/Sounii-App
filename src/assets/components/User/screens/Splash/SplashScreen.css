@@ -39,18 +39,26 @@
   color: #ff7f00; /* orange */
 }
 
+.splash-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* center children horizontally */
+  justify-content: center;
+}
+
 .loader-bar {
   width: 80%;
   height: 6px;
   background-color: #333;
   border-radius: 3px;
   overflow: hidden;
-  margin-bottom: 20px;
+  margin: 20px 0; /* vertical spacing */
 }
+
 
 .loader-progress {
   height: 100%;
-  background-color: #ff7f00; /* orange */
+  background-color: #ff7f00;
   width: 0%;
   transition: width 0.1s linear;
 }

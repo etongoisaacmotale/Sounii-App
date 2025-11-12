@@ -18,7 +18,7 @@ class LoginForm extends Component {
     this.setState({ [field]: value });
   };
 
-  handleLogin = async () => {
+  handleLogin = () => {
     const { emailOrPhone, password } = this.state;
 
     if (!emailOrPhone || !password) {
@@ -44,7 +44,7 @@ class LoginForm extends Component {
       }
 
       this.setState({ loading: false });
-    }, 1000);
+    }, 800); // Slightly faster for better UX
   };
 
   handleForgotPassword = () => {
@@ -79,7 +79,9 @@ class LoginForm extends Component {
         {error && <p className="error-text">{error}</p>}
 
         {loading ? (
-          <Loader />
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '15px' }}>
+            <Loader />
+          </div>
         ) : (
           <SouniiButton text="Login" onClick={this.handleLogin} />
         )}

@@ -1,29 +1,29 @@
-// src/assets/components/User/layouts/AppLayout.jsx
 import React, { Component } from "react";
-import MobileLayout from "./MobileLayout";
-import DesktopLayout from "./DesktopLayout";
+import { Outlet } from "react-router-dom";
+import MainTabs from "../navigation/MainTabs.jsx";
+import MoreModal from "../screens/MoreModal/MoreModal.jsx";
 
-class AppLayout extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { isMobile: window.innerWidth <= 768 };
-  }
-
-  handleResize = () => {
-    this.setState({ isMobile: window.innerWidth <= 768 });
+export default class AppLayout extends Component {
+  state = {
+    showMore: false,
   };
 
-  componentDidMount() {
-    window.addEventListener("resize", this.handleResize);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.handleResize);
-  }
+  toggleMore = () => {
+    this.setState({ showMore: !this.state.showMore });
+  };
 
   render() {
-    return this.state.isMobile ? <MobileLayout /> : <DesktopLayout />;
+    return (
+      <div className="min-h-screen bg-black text-white relative pb-16">
+        {/* Screen content */}
+        <Outlet />
+
+        {/* More modal overlay */}
+        {this.state.showMore && <MoreModal onClose={this.toggleMore} />}
+
+        {/* Footer tabs (always visible) */}
+        <MainTabs onMoreClick={this.toggleMore} />
+      </div>
+    );
   }
 }
-
-export default AppLayout;

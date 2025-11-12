@@ -1,0 +1,100 @@
+/* Container */
+.home-container {
+  min-height: 100vh;
+  background: linear-gradient(90deg, #000 0%, #1a1a1a 50%, #ff7f00 100%);
+  color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+  padding-bottom: 80px; /* space for mini player */
+}
+
+/* Header */
+.home-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background-color: rgba(0,0,0,0.7);
+  backdrop-filter: blur(10px);
+}
+
+.home-header h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  text-shadow: 1px 1px 4px #000;
+}
+
+.more-btn {
+  position: relative;
+  background-color: #ff7f00;
+  color: #000;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.more-btn:hover {
+  background-color: #e67300;
+}
+
+.more-dropdown {
+  position: absolute;
+  top: 48px;
+  right: 0;
+  background-color: rgba(0,0,0,0.85);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  overflow: hidden;
+  min-width: 150px;
+  display: flex;
+  flex-direction: column;
+  z-index: 20;
+}
+
+.more-dropdown button {
+  background: transparent;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  text-align: left;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.more-dropdown button:hover {
+  background-color: #ff7f00;
+  color: #000;
+}
+
+
+/* Greeting */
+.greeting {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 16px 24px;
+}
+
+/* Search Section */
+.search-section {
+  margin: 0 24px;
+}
+
+/* Main content */
+.home-main {
+  padding: 16px 24px;
+}
+
+/* Scrollbar hide for horizontal lists */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}

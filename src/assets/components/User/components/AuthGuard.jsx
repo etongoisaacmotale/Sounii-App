@@ -1,18 +1,19 @@
-import React, { Component } from 'react'
-import { Navigate } from 'react-router-dom';
+// assets/components/User/components/AuthGuard.jsx
+import React, { Component } from "react";
+import { Navigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 class AuthGuard extends Component {
-    render() {
-        const { isAuthenticated, children } = this.props;
+  static contextType = AuthContext;
 
-        if (!isAuthenticated) {
-            // Redirect to login if not authenticated
-            return <Navigate to="/login" replace />;
-        }
+  render() {
+    const { isAuthenticated, loading } = this.context;
 
-        // Render protected content if authenticated
-        return children;
-    }
+    if (loading) return <p>Loading...</p>;
+    if (!isAuthenticated) return <Navigate to="/login" replace />;
+
+    return this.props.children;
+  }
 }
 
 export default AuthGuard;
