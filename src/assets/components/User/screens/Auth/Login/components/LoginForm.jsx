@@ -1,112 +1,94 @@
-// LoginForm.jsx
 import React, { Component } from "react";
 import "./LoginForm.css";
 import SouniiInput from "../../../../components/SouniiInput";
 import SouniiButton from "../../../../components/SouniiButton";
 import Loader from "../../../../components/Loader";
-import { withRouter } from "../../../../HOC/withRouter";
 
 class LoginForm extends Component {
-  state = {
-    emailOrPhone: "",
-    password: "",
-    loading: false,
-    error: "",
-  };
+    state = {
+        emailOrPhone: "",
+        password: "",
+        loading: false,
+        error: "",
+    };
 
-  handleChange = (field, value) => {
-    this.setState({ [field]: value });
-  };
+    handleChange = (field, value) => {
+        this.setState({ [field]: value });
+    };
 
-  handleLogin = () => {
-    const { emailOrPhone, password } = this.state;
+    handleLogin = async () => {
+        const { emailOrPhone, password } = this.state;
 
-    if (!emailOrPhone || !password) {
-      this.setState({ error: "Please fill in all fields." });
-      return;
+        if (!emailOrPhone || !password) {
+            this.setState({ error: "Please fill in all fields." });
+            return;
+        }
+
+        this.setState({ loading: true, error: "" });
+
+        try {
+            // Call parent-provided login (AuthContext → UserService)
+            await this.props.onLogin(emailOrPhone, password);
+        } catch (err) {
+            this.setState({ error: err.message });
+        } finally {
+            this.setState({ loading: false });
+        }
+    };
+
+
+    render() {
+        const { emailOrPhone, password, loading, error } = this.state;
+
+        return (
+            <div className="login-form-container">
+                <h2 className="login-title">Welcome Back to Sounii</h2>
+
+                <SouniiInput
+                    type="text"
+                    value={emailOrPhone}
+                    onChange={(e) => this.handleChange("emailOrPhone", e.target.value)}
+                    placeholder="Email or Phone Number"
+                />
+
+                <SouniiInput
+                    type="password"
+                    value={password}
+                    onChange={(e) => this.handleChange("password", e.target.value)}
+                    placeholder="Password"
+                />
+
+                {error && <p className="error-text">{error}</p>}
+
+                {loading ? (
+                    <div style={{ display: "flex", justifyContent: "center", marginTop: "15px" }}>
+                        <Loader />
+                    </div>
+                ) : (
+                    <SouniiButton text="Login" onClick={this.handleLogin} />
+                )}
+
+                <p
+                    className="forgot-password-link"
+                    onClick={this.props.onForgotPassword} // ✅ navigates correctly now
+                    style={{ cursor: "pointer", color: "blue", marginTop: "10px" }}
+                >
+                    Forgot Password?
+                </p>
+
+                <p className="login-footer">
+                    Don’t have an account?{" "}
+                    <span
+                        className="signup-link"
+                        onClick={this.props.onSignup}
+                        style={{ cursor: "pointer", color: "blue" }}
+                    >
+                        Sign Up
+                    </span>
+                </p>
+            </div>
+        );
     }
-
-    this.setState({ loading: true, error: "" });
-
-    setTimeout(() => {
-      const storedUser = JSON.parse(localStorage.getItem("souniiUser"));
-
-      if (!storedUser) {
-        this.setState({ error: "No account found. Please register." });
-      } else if (
-        (storedUser.email === emailOrPhone || storedUser.phone === emailOrPhone) &&
-        storedUser.password === password
-      ) {
-        alert(`Welcome back, ${storedUser.name}!`);
-        if (this.props.navigate) this.props.navigate("/home");
-      } else {
-        this.setState({ error: "Invalid credentials." });
-      }
-
-      this.setState({ loading: false });
-    }, 800); // Slightly faster for better UX
-  };
-
-  handleForgotPassword = () => {
-    if (this.props.navigate) this.props.navigate("/forgot-password");
-  };
-
-  handleSignup = () => {
-    if (this.props.navigate) this.props.navigate("/register");
-  };
-
-  render() {
-    const { emailOrPhone, password, loading, error } = this.state;
-
-    return (
-      <div className="login-form-container">
-        <h2 className="login-title">Welcome Back to Sounii</h2>
-
-        <SouniiInput
-          type="text"
-          value={emailOrPhone}
-          onChange={(e) => this.handleChange("emailOrPhone", e.target.value)}
-          placeholder="Email or Phone Number"
-        />
-
-        <SouniiInput
-          type="password"
-          value={password}
-          onChange={(e) => this.handleChange("password", e.target.value)}
-          placeholder="Password"
-        />
-
-        {error && <p className="error-text">{error}</p>}
-
-        {loading ? (
-          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '15px' }}>
-            <Loader />
-          </div>
-        ) : (
-          <SouniiButton text="Login" onClick={this.handleLogin} />
-        )}
-
-        <p
-          className="forgot-password-link"
-          onClick={this.handleForgotPassword}
-          style={{ cursor: "pointer", color: "blue", marginTop: "10px" }}
-        >
-          Forgot Password?
-        </p>
-
-        <p className="login-footer">
-          Don’t have an account?{" "}
-          <span
-            className="signup-link"
-            onClick={this.handleSignup}
-            style={{ cursor: "pointer", color: "blue" }}
-          >
-            Sign Up
-          </span>
-        </p>
-      </div>
-    );
-  }
 }
 
-export default withRouter(LoginForm);
+export default LoginForm;

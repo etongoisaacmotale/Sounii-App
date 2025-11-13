@@ -1,8 +1,15 @@
 // assets/components/User/services/UserService.jsx
 class UserService {
+  async register({ name, email, phone, password }) {
+    const newUser = { id: Date.now(), name, email, phone, password };
+    localStorage.setItem("user", JSON.stringify(newUser));
+    await new Promise((res) => setTimeout(res, 500)); // simulate network delay
+    return newUser;
+  }
+
   async login(emailOrPhone, password) {
     const user = JSON.parse(localStorage.getItem("user"));
-    await new Promise((res) => setTimeout(res, 500)); // simulate delay
+    await new Promise((res) => setTimeout(res, 500)); // simulate network delay
 
     if (!user) throw new Error("No account found. Please register.");
     if ((user.email === emailOrPhone || user.phone === emailOrPhone) && user.password === password) {
@@ -10,13 +17,6 @@ class UserService {
     } else {
       throw new Error("Invalid credentials.");
     }
-  }
-
-  async register({ name, email, phone, password }) {
-    const newUser = { id: Date.now(), name, email, phone, password };
-    localStorage.setItem("user", JSON.stringify(newUser));
-    await new Promise((res) => setTimeout(res, 500));
-    return newUser;
   }
 
   async logout() {

@@ -4,16 +4,15 @@ import { Navigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 class AuthGuard extends Component {
-  static contextType = AuthContext;
+    static contextType = AuthContext;
 
-  render() {
-    const { isAuthenticated, loading } = this.context;
+    render() {
+        const { user, loading } = this.context;
+        if (loading) return <div>Loading...</div>;
+        if (!user) return <Navigate to="/login" replace />;
+        return this.props.children;
 
-    if (loading) return <p>Loading...</p>;
-    if (!isAuthenticated) return <Navigate to="/login" replace />;
-
-    return this.props.children;
-  }
+    }
 }
 
 export default AuthGuard;

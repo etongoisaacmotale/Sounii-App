@@ -1,8 +1,8 @@
-// assets/components/User/navigation/AppNavigator.jsx
 import React, { Component, useContext } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import SplashScreen from "../screens/Splash/SplashScreen";
 import LoginScreen from "../screens/Auth/Login/LoginScreen";
+import ForgotPasswordScreen from "../screens/Auth/ForgotPassword/ForgotPasswordScreen";
 import RegisterScreen from "../screens/Auth/Register/RegisterScreen";
 import HomeScreen from "../screens/Home/HomeScreen";
 import SearchScreen from "../screens/Search/SearchScreen";
@@ -12,7 +12,6 @@ import EventsScreen from "../screens/Events/EventsScreen";
 import AuthGuard from "../components/AuthGuard";
 import { AuthContext } from "../context/AuthContext";
 
-// HOC to pass auth context to class component
 function withAuth(Component) {
   return function Wrapped(props) {
     const auth = useContext(AuthContext);
@@ -27,7 +26,7 @@ class AppNavigator extends Component {
 
     return (
       <Routes>
-        {/* Splash screen route */}
+        {/* Splash screen */}
         <Route path="/splash" element={<SplashScreen />} />
 
         {/* Public routes */}
@@ -39,13 +38,17 @@ class AppNavigator extends Component {
           path="/register"
           element={isAuthenticated ? <Navigate to="/home" /> : <RegisterScreen />}
         />
+        <Route
+          path="/forgot-password"
+          element={isAuthenticated ? <Navigate to="/home" /> : <ForgotPasswordScreen />}
+        />
 
         {/* Protected routes */}
         <Route
           path="/home"
           element={
             <AuthGuard>
-              {isAuthenticated ? <HomeScreen /> : <Navigate to="/login" />}
+              <HomeScreen />
             </AuthGuard>
           }
         />
@@ -53,7 +56,7 @@ class AppNavigator extends Component {
           path="/search"
           element={
             <AuthGuard>
-              {isAuthenticated ? <SearchScreen /> : <Navigate to="/login" />}
+              <SearchScreen />
             </AuthGuard>
           }
         />
@@ -61,7 +64,7 @@ class AppNavigator extends Component {
           path="/library"
           element={
             <AuthGuard>
-              {isAuthenticated ? <LibraryScreen /> : <Navigate to="/login" />}
+              <LibraryScreen />
             </AuthGuard>
           }
         />
@@ -69,7 +72,7 @@ class AppNavigator extends Component {
           path="/community"
           element={
             <AuthGuard>
-              {isAuthenticated ? <CommunityScreen /> : <Navigate to="/login" />}
+              <CommunityScreen />
             </AuthGuard>
           }
         />
@@ -77,14 +80,14 @@ class AppNavigator extends Component {
           path="/events"
           element={
             <AuthGuard>
-              {isAuthenticated ? <EventsScreen /> : <Navigate to="/login" />}
+              <EventsScreen />
             </AuthGuard>
           }
         />
 
-        {/* Default route redirects to splash */}
+        {/* Default route */}
         <Route path="/" element={<Navigate to="/splash" />} />
-        <Route path="*" element={<Navigate to="/splash" />} />
+        <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
     );
   }

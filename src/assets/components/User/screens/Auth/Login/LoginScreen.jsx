@@ -1,31 +1,32 @@
 import React, { Component } from "react";
 import { withRouter } from "../../../HOC/withRouter";
+import { AuthContext } from "../../../context/AuthContext";
 import "./LoginScreen.css";
 import LoginForm from "./components/LoginForm";
 import SouniiSocialLoginButtons from "./components/SouniiSocialLoginButtons";
 
 class LoginScreen extends Component {
-  handleLogin = (emailOrPhone, password) => {
-    const storedUser = JSON.parse(localStorage.getItem("souniiUser"));
+  static contextType = AuthContext; // Access login/register/logout
 
-    if (!storedUser) {
-      alert("No account found. Please register first.");
-      return;
-    }
-
-    if (
-      (storedUser.email === emailOrPhone || storedUser.phone === emailOrPhone) &&
-      storedUser.password === password
-    ) {
-      alert(`Welcome back, ${storedUser.name}!`);
-      if (this.props.navigate) this.props.navigate("/home");
-    } else {
-      alert("Invalid credentials. Please try again.");
+  // Handle login via AuthContext
+  handleLogin = async (emailOrPhone, password) => {
+    try {
+      const user = await this.context.login(emailOrPhone, password);
+      alert(`Welcome back, ${user.name}!`);
+      this.props.navigate("/home"); // Navigate after successful login
+    } catch (error) {
+      alert(error.message);
     }
   };
 
+  // Navigate to registration screen
   handleSignupRedirect = () => {
-    if (this.props.navigate) this.props.navigate("/register");
+    this.props.navigate("/register");
+  };
+
+  // Navigate to forgot password screen
+  handleForgotPasswordRedirect = () => {
+    this.props.navigate("/forgot-password");
   };
 
   render() {
@@ -36,6 +37,7 @@ class LoginScreen extends Component {
         <LoginForm
           onLogin={this.handleLogin}
           onSignup={this.handleSignupRedirect}
+          onForgotPassword={this.handleForgotPasswordRedirect}
         />
 
         <div className="social-login-wrapper">

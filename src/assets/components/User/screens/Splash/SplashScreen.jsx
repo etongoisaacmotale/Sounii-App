@@ -6,31 +6,20 @@ import SouniiButton from "../../components/SouniiButton";
 import SouniiLogo from "../../assets/images/sounii-logo.png";
 
 class SplashScreen extends Component {
-  static contextType = AuthContext; // access auth state inside class component
+  static contextType = AuthContext;
 
   state = {
-    showLogoOnly: true, // initially show only logo
-    loading: false,
+    showLogoOnly: true, // Step 1: only logo
     progress: 0,
+    loading: false,
+    completed: false,
   };
 
   componentDidMount() {
-    // Show logo for 2 seconds
+    // Step 1: Show logo animation for 2 seconds
     this.logoTimeout = setTimeout(() => {
       this.setState({ showLogoOnly: false, loading: true });
-
-      // Start progress bar
-      this.interval = setInterval(() => {
-        this.setState((prev) => {
-          if (prev.progress >= 100) {
-            clearInterval(this.interval);
-            const nextPath = this.context?.user ? "/home" : "/login";
-            this.props.navigate(nextPath); // auto-redirect after progress completes
-            return { progress: 100, loading: false };
-          }
-          return { progress: prev.progress + 2 };
-        });
-      }, 50);
+      this.startProgressBar();
     }, 2000);
   }
 
@@ -39,28 +28,49 @@ class SplashScreen extends Component {
     clearTimeout(this.logoTimeout);
   }
 
-  handleProceed = () => {
-    const nextPath = this.context?.user ? "/home" : "/login";
-    this.props.navigate(nextPath);
+  startProgressBar = () => {
+    // Step 2: Simulate loading progress
+    this.interval = setInterval(() => {
+      this.setState((prev) => {
+        if (prev.progress >= 100) {
+          clearInterval(this.interval);
+          this.handleNavigation();
+          return { progress: 100, loading: false, completed: true };
+        }
+        return { progress: prev.progress + 2 };
+      });
+    }, 50);
   };
 
+  handleNavigation = () => {
+  // Only auto-redirect on first load
+  if (this.context?.user) {
+    this.props.navigate("/home");
+  } else {
+    this.props.navigate("/login");
+  }
+};
+
+
   render() {
-    const { showLogoOnly, loading, progress } = this.state;
+    const { showLogoOnly, progress, loading, completed } = this.state;
 
     return (
       <div className="dynamic-splash-container">
+        {/* Animated logo */}
         <img
           src={SouniiLogo}
           alt="Sounii Logo"
           className={`splash-logo ${showLogoOnly ? "logo-animate" : "logo-small"}`}
         />
 
+        {/* Fade-in content after logo */}
         {!showLogoOnly && (
           <div className="splash-content">
             <h1 className="splash-title">Welcome to Sounii</h1>
             <p className="splash-subtitle">Discover musical treasures...</p>
 
-            {loading ? (
+            {loading && !completed ? (
               <div className="loader-bar">
                 <div
                   className="loader-progress"
@@ -68,7 +78,7 @@ class SplashScreen extends Component {
                 />
               </div>
             ) : (
-              <SouniiButton text="Get Started" onClick={this.handleProceed} />
+              <SouniiButton text="Get Started" onClick={this.handleNavigation} />
             )}
           </div>
         )}
