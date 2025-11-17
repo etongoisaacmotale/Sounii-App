@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import EventCard from "./components/EventCard";
+import EventCard from "./components/EventCard.jsx";
+import "./EventsScreen.css"; // Make sure to create this CSS file
 
 // Sample events
 const sampleEvents = [
@@ -63,24 +64,22 @@ export default class EventsScreen extends Component {
     // Filter events for active tab
     const filteredEvents = sampleEvents.filter((event) => event.type === activeTab);
 
-    // Trending carousel (for all types or just upcoming/live)
+    // Trending events carousel
     const trendingEvents = sampleEvents.filter((event) => event.trending);
 
     return (
-      <div className="min-h-screen bg-gradient-to-r from-black via-white to-orange-500 p-4">
+      <div className="events-screen-container">
         {/* Header */}
-        <h1 className="text-3xl font-bold text-white drop-shadow-lg mb-6">Events</h1>
+        <h1 className="events-screen-title">Events</h1>
 
         {/* Tabs */}
-        <div className="flex justify-center gap-4 mb-6">
+        <div className="events-tabs">
           {["upcoming", "live", "merch"].map((tab) => (
             <button
               key={tab}
               onClick={() => this.setActiveTab(tab)}
-              className={`px-6 py-2 rounded-full font-semibold transition-colors ${
-                activeTab === tab
-                  ? "bg-orange-500 text-black"
-                  : "bg-black/70 text-white hover:bg-orange-500 hover:text-black"
+              className={`events-tab-btn ${
+                activeTab === tab ? "active" : ""
               }`}
             >
               {tab.charAt(0).toUpperCase() + tab.slice(1)}
@@ -90,7 +89,7 @@ export default class EventsScreen extends Component {
 
         {/* Trending Carousel */}
         {trendingEvents.length > 0 && (
-          <div className="flex space-x-4 overflow-x-auto scrollbar-hide mb-6">
+          <div className="events-carousel">
             {trendingEvents.map((event) => (
               <EventCard key={event.id} event={event} carousel />
             ))}
@@ -98,11 +97,11 @@ export default class EventsScreen extends Component {
         )}
 
         {/* Event Feed */}
-        <div className="space-y-6">
+        <div className="events-feed">
           {filteredEvents.length > 0 ? (
             filteredEvents.map((event) => <EventCard key={event.id} event={event} />)
           ) : (
-            <p className="text-white text-center">No events to display.</p>
+            <p className="no-events-msg">No events to display.</p>
           )}
         </div>
       </div>

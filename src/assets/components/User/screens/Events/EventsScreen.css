@@ -1,0 +1,63 @@
+.events-screen-container {
+  min-height: 100vh;
+  padding: 1rem;
+  background: linear-gradient(to right, #000000,  #ff8000);
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.events-screen-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: orange;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+}
+
+.events-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.events-tab-btn {
+  padding: 0.5rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.events-tab-btn:hover {
+  background: orange;
+  color: black;
+}
+
+.events-tab-btn.active {
+  background: orange;
+  color: black;
+}
+
+.events-carousel {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+}
+
+.events-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.no-events-msg {
+  text-align: center;
+  color: #ffcc80;
+  font-size: 1.2rem;
+}

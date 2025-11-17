@@ -1,66 +1,52 @@
 import React, { Component } from "react";
+import "./TicketModal.css";
 
 export default class TicketModal extends Component {
-  state = {
-    quantity: 1,
-  };
+    state = {
+        quantity: 1,
+    };
 
-  increaseQuantity = () => {
-    this.setState((prev) => ({ quantity: prev.quantity + 1 }));
-  };
+    increaseQuantity = () => {
+        this.setState((prev) => ({ quantity: prev.quantity + 1 }));
+    };
 
-  decreaseQuantity = () => {
-    this.setState((prev) => ({ quantity: Math.max(prev.quantity - 1, 1) }));
-  };
+    decreaseQuantity = () => {
+        this.setState((prev) => ({ quantity: Math.max(prev.quantity - 1, 1) }));
+    };
 
-  handlePurchase = () => {
-    const { onPurchase } = this.props;
-    onPurchase(this.state.quantity);
-  };
+    handlePurchase = () => {
+        const { onPurchase } = this.props;
+        onPurchase(this.state.quantity);
+    };
 
-  render() {
-    const { onClose, event } = this.props;
-    const { quantity } = this.state;
+    render() {
+        const { onClose, event } = this.props;
+        const { quantity } = this.state;
 
-    return (
-      <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
-        <div className="bg-black/80 backdrop-blur-md rounded-lg p-6 w-80 text-white">
-          <h2 className="text-xl font-bold mb-4">Purchase Ticket</h2>
-          <p className="mb-2">Event: {event.title}</p>
-          <p className="mb-4">Artist: {event.artist}</p>
+        return (
+            <div className="ticketmodal-overlay">
+                <div className="ticketmodal-container">
+                    <h2>Purchase Ticket</h2>
+                    <p>Event: {event.title}</p>
+                    <p>Artist: {event.artist}</p>
 
-          <div className="flex items-center justify-between mb-4">
-            <button
-              onClick={this.decreaseQuantity}
-              className="px-3 py-1 bg-orange-500 text-black rounded-lg font-semibold hover:bg-orange-600 transition-colors"
-            >
-              -
-            </button>
-            <span className="text-lg">{quantity}</span>
-            <button
-              onClick={this.increaseQuantity}
-              className="px-3 py-1 bg-orange-500 text-black rounded-lg font-semibold hover:bg-orange-600 transition-colors"
-            >
-              +
-            </button>
-          </div>
+                    <div className="ticketmodal-quantity">
+                        <button onClick={this.decreaseQuantity}>-</button>
+                        <span>{quantity}</span>
+                        <button onClick={this.increaseQuantity}>+</button>
+                    </div>
 
-          <div className="flex justify-between">
-            <button
-              onClick={onClose}
-              className="px-4 py-2 bg-black/70 text-white rounded-lg hover:bg-orange-500 hover:text-black transition-colors"
-            >
-              Cancel
-            </button>
-            <button
-              onClick={this.handlePurchase}
-              className="px-4 py-2 bg-orange-500 text-black rounded-lg hover:bg-orange-600 transition-colors"
-            >
-              Purchase
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
+                    <div className="ticketmodal-actions">
+                        <button onClick={onClose} className="cancel-btn">
+                            Cancel
+                        </button>
+                        <button onClick={this.handlePurchase} className="purchase-btn">
+                            Purchase
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        );
+    }
 }

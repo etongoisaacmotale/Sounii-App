@@ -1,0 +1,104 @@
+/* ===== Modal Overlay ===== */
+.ticketmodal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+/* ===== Modal Container ===== */
+.ticketmodal-container {
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  width: 20rem;
+  max-width: 90%;
+  color: white;
+  box-shadow: 0 0 18px rgba(255, 128, 0, 0.35);
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+/* ===== Modal Header ===== */
+.ticketmodal-container h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: orange;
+  margin-bottom: 0.8rem;
+}
+
+/* ===== Event Info ===== */
+.ticketmodal-container p {
+  font-size: 0.9rem;
+  opacity: 0.85;
+  margin-bottom: 0.8rem;
+}
+
+/* ===== Quantity Selector ===== */
+.ticketmodal-quantity {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.ticketmodal-quantity button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.6rem;
+  font-weight: 700;
+  background: orange;
+  color: black;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.ticketmodal-quantity button:hover {
+  background: #ff9833;
+}
+
+.ticketmodal-quantity span {
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: center;
+  min-width: 2rem;
+}
+
+/* ===== Action Buttons ===== */
+.ticketmodal-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.ticketmodal-actions button {
+  flex: 1;
+  padding: 0.5rem 0;
+  border-radius: 0.6rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.ticketmodal-actions .cancel-btn {
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+}
+
+.ticketmodal-actions .cancel-btn:hover {
+  background: orange;
+  color: black;
+}
+
+.ticketmodal-actions .purchase-btn {
+  background: orange;
+  color: black;
+}
+
+.ticketmodal-actions .purchase-btn:hover {
+  background: #ff9833;
+}

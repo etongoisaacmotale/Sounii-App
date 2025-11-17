@@ -1,0 +1,81 @@
+/* ===== Event Card Container ===== */
+.eventcard-container {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(12px);
+  border-radius: 1rem;
+  padding: 1rem;
+  color: white;
+  box-shadow: 0 0 12px rgba(255, 128, 0, 0.2);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.eventcard-container:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 18px rgba(255, 128, 0, 0.35);
+}
+
+/* Carousel mode */
+.eventcard-carousel {
+  min-width: 300px;
+  scroll-snap-align: start;
+}
+
+/* ===== Title / Artist / Venue ===== */
+.eventcard-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: orange;
+}
+
+.eventcard-artist,
+.eventcard-venue,
+.eventcard-date {
+  font-size: 0.9rem;
+  opacity: 0.75;
+  margin-top: 2px;
+}
+
+/* ===== LIVE Badge ===== */
+.eventcard-livebadge {
+  padding: 0.25rem 0.5rem;
+  background: #ff1a1a;
+  color: white;
+  font-size: 0.7rem;
+  border-radius: 9999px;
+  font-weight: bold;
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.4);
+}
+
+/* ===== Media ===== */
+.eventcard-media {
+  width: 100%;
+  height: 12rem;
+  object-fit: cover;
+  border-radius: 0.8rem;
+  margin: 0.8rem 0;
+}
+
+/* ===== Action Button ===== */
+.eventcard-button {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  background: orange;
+  color: black;
+  font-weight: 700;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  transition: background 0.25s ease;
+  font-size: 0.95rem;
+}
+
+.eventcard-button:hover {
+  background: #ff9833;
+}
+
+/* ===== Purchased Label ===== */
+.eventcard-purchased {
+  margin-top: 0.5rem;
+  color: #32ff7e;
+  font-size: 0.85rem;
+  font-weight: 500;
+}

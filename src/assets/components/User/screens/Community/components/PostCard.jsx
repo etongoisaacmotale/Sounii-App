@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import CommentSection from "./CommentSection.jsx";
 import CommentBox from "./CommentBox.jsx";
+import "./PostCard.css";
 
 export default class PostCard extends Component {
   constructor(props) {
@@ -13,18 +14,20 @@ export default class PostCard extends Component {
   }
 
   toggleLike = () => {
-    const { likes } = this.state;
-    this.setState({ likes: likes + 1 }, () => {
-      this.props.updatePost({
-        ...this.props.post,
-        likes: this.state.likes,
-        comments: this.state.comments,
-      });
-    });
+    this.setState(
+      (prev) => ({ likes: prev.likes + 1 }),
+      () => {
+        this.props.updatePost({
+          ...this.props.post,
+          likes: this.state.likes,
+          comments: this.state.comments,
+        });
+      }
+    );
   };
 
   toggleComments = () => {
-    this.setState((prev) => ({ showComments: !prev.showComments }));
+    this.setState((p) => ({ showComments: !p.showComments }));
   };
 
   addComment = (text) => {
@@ -33,6 +36,7 @@ export default class PostCard extends Component {
       user: "You",
       text,
     };
+
     this.setState(
       (prev) => ({ comments: [...prev.comments, newComment] }),
       () => {
@@ -50,44 +54,29 @@ export default class PostCard extends Component {
     const { likes, comments, showComments } = this.state;
 
     return (
-      <div
-        className={`bg-black/70 backdrop-blur-md shadow-lg rounded-lg p-4 text-white ${
-          carousel ? "min-w-[300px]" : ""
-        }`}
-      >
-        <h2 className="font-bold text-xl mb-2">{post.title}</h2>
-        <p className="text-gray-300 mb-2">by {post.artist}</p>
+      <div className={`postcard-container ${carousel ? "postcard-carousel" : ""}`}>
+        <h2 className="postcard-title">{post.title}</h2>
+        <p className="postcard-artist">by {post.artist}</p>
 
-        {/* Media */}
         {post.type === "image" && post.media && (
-          <img
-            src={post.media}
-            alt={post.title}
-            className="w-full h-64 object-cover rounded mb-2"
-          />
+          <img src={post.media} alt={post.title} className="postcard-media" />
         )}
+
         {post.type === "video" && post.media && (
-          <video
-            src={post.media}
-            controls
-            className="w-full h-64 rounded mb-2"
-          />
+          <video src={post.media} controls className="postcard-media"></video>
         )}
 
-        <p className="mb-2">{post.content}</p>
+        <p className="postcard-text">{post.content}</p>
 
-        <div className="flex items-center gap-4 mb-2">
-          <button
-            onClick={this.toggleLike}
-            className="px-3 py-1 bg-orange-500 text-black rounded-lg font-semibold hover:bg-orange-600 transition-colors"
-          >
+        <div className="postcard-actions">
+          <button onClick={this.toggleLike} className="btn-like">
             Like ({likes})
           </button>
-          <button
-            onClick={this.toggleComments}
-            className="px-3 py-1 bg-black/70 text-white rounded-lg font-semibold hover:bg-orange-500 hover:text-black transition-colors"
-          >
-            {showComments ? "Hide Comments" : `Comments (${comments.length})`}
+
+          <button onClick={this.toggleComments} className="btn-comments">
+            {showComments
+              ? "Hide Comments"
+              : `Comments (${comments.length})`}
           </button>
         </div>
 

@@ -1,0 +1,42 @@
+/* ===== Comment Section Container ===== */
+.commentsection-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(6px);
+  border-radius: 1rem;
+  max-width: 600px;
+  margin: 1rem auto;
+  color: white;
+}
+
+/* ===== Individual Comment Item ===== */
+.commentsection-item {
+  padding: 0.7rem 1rem;
+  background: #0d0d0d;
+  border-left: 4px solid orange;
+  border-radius: 0.5rem;
+  display: flex;
+  gap: 0.3rem;
+  align-items: flex-start;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.commentsection-item:hover {
+  background: #1a1a1a;
+  transform: translateX(4px);
+}
+
+/* ===== Username Styling ===== */
+.comment-username {
+  font-weight: bold;
+  color: orange;
+}
+
+/* ===== Comment Text ===== */
+.comment-text {
+  color: #f2f2f2;
+  word-break: break-word;
+}

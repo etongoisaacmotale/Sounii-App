@@ -1,0 +1,73 @@
+/* ===== Container ===== */
+.library-container {
+  min-height: 100vh;
+  background: linear-gradient(to right, #000000, #ff8000);
+  color: white;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== Header ===== */
+.library-header {
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  text-align: center;
+}
+
+.library-header h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: orange;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+/* ===== Tabs ===== */
+.library-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.tab-button {
+  padding: 0.5rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tab-button:hover {
+  background: orange;
+  color: black;
+}
+
+.tab-button.active {
+  background: orange;
+  color: black;
+}
+
+/* ===== Content Area ===== */
+.library-content {
+  flex: 1;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Optional: style empty messages inside content */
+.library-content .library-empty-message {
+  text-align: center;
+  font-size: 1.25rem;
+  color: #ffcc80;
+  margin-top: 3rem;
+}

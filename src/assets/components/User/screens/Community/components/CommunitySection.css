@@ -1,0 +1,64 @@
+/* =========================================
+   COMMUNITY SECTION WRAPPER
+========================================= */
+.community-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+}
+
+/* =========================================
+   FILTER TABS
+========================================= */
+.community-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.community-tab-btn {
+  padding: 0.6rem 1.8rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border: none;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  transition: 0.25s ease;
+}
+
+.community-tab-btn:hover {
+  background: #ff8000;
+  color: black;
+}
+
+.community-tab-btn.active {
+  background: #ff8000;
+  color: black;
+}
+
+/* =========================================
+   TRENDING CAROUSEL
+========================================= */
+.community-carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  scrollbar-width: none; /* Firefox */
+}
+
+.community-carousel::-webkit-scrollbar {
+  display: none; /* Chrome & Safari */
+}
+
+/* =========================================
+   POST FEED
+========================================= */
+.community-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}

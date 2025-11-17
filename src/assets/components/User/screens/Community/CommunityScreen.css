@@ -1,0 +1,52 @@
+/* ===== Full Screen Background ===== */
+.community-screen {
+  background: linear-gradient(to right, #000000, #0a0a0a, #ff7a00);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+/* ===== Header ===== */
+.community-header {
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(10px);
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 136, 0, 0.2);
+}
+
+.community-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: orange;
+  text-shadow: 0px 0px 8px rgba(255, 136, 0, 0.6);
+}
+
+/* ===== Main Content ===== */
+.community-main {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+}
+
+.community-main::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+/* ===== Mini Player Container ===== */
+.community-miniplayer {
+  position: sticky;
+  bottom: 0;
+  z-index: 15;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
+  padding: 0.3rem 0;
+  border-top: 1px solid rgba(255, 136, 0, 0.3);
+}

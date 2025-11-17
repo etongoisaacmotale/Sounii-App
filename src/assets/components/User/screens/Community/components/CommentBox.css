@@ -1,0 +1,52 @@
+/* ===== Comment Box Container ===== */
+.commentbox-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(0, 0, 0, 0.75);
+  padding: 0.7rem 1rem;
+  border-radius: 9999px;
+  backdrop-filter: blur(6px);
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* ===== Input ===== */
+.commentbox-input {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  background: #111;
+  color: white;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+}
+
+.commentbox-input::placeholder {
+  color: #bbbbbb;
+}
+
+.commentbox-input:focus {
+  background: #1a1a1a;
+  box-shadow: 0 0 8px rgba(255, 128, 0, 0.6);
+}
+
+/* ===== Send Button ===== */
+.commentbox-btn {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 9999px;
+  background: orange;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.commentbox-btn:hover {
+  background: #ff9d33;
+  box-shadow: 0 0 8px rgba(255, 128, 0, 0.7);
+}

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import SongCard from "../../../components/SongCard";
+import "./LibraryComponents.css";
 
-// Sample playlist data (replace with real data/API later)
 const samplePlaylist = {
   id: 1,
   name: "Morning Chill",
@@ -16,36 +16,37 @@ const samplePlaylist = {
 };
 
 export default class Playlist extends Component {
-  state = {
-    playlist: samplePlaylist,
-  };
+  state = { playlist: samplePlaylist };
 
   render() {
     const { playlist } = this.state;
 
     return (
-      <div className="min-h-screen bg-gradient-to-r from-black via-white to-orange-500">
-        {/* Header */}
-        <header className="p-4 flex items-center justify-between text-white sticky top-0 z-10 bg-black/70 backdrop-blur-md">
-          <h1 className="text-3xl font-bold drop-shadow-lg">{playlist.name}</h1>
-        </header>
+      <div className="library-screen">
+        <div className="library-screen-content">
+          {/* Playlist Info */}
+          <div className="playlist-info">
+            <img
+              src={playlist.image}
+              alt={playlist.name}
+              className="playlist-image"
+            />
+            <p className="playlist-description">{playlist.description}</p>
+          </div>
 
-        {/* Playlist info */}
-        <div className="flex flex-col items-center text-center p-6">
-          <img
-            src={playlist.image}
-            alt={playlist.name}
-            className="w-64 h-64 rounded-lg mb-4 object-cover border-2 border-orange-500 shadow-lg"
-          />
-          <p className="text-gray-200 text-lg">{playlist.description}</p>
+          {/* Songs */}
+          {playlist.songs.length > 0 ? (
+            <div className="library-grid">
+              {playlist.songs.map((song) => (
+                <SongCard key={song.id} song={song} playlist={playlist.songs} />
+              ))}
+            </div>
+          ) : (
+            <div className="library-empty-message">
+              No songs in this playlist 😢
+            </div>
+          )}
         </div>
-
-        {/* Songs */}
-        <main className="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {playlist.songs.map((song) => (
-            <SongCard key={song.id} song={song} playlist={playlist.songs} />
-          ))}
-        </main>
       </div>
     );
   }
