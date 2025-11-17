@@ -1,13 +1,10 @@
 import React, { Component } from "react";
 import { withRouter } from "../../HOC/withRouter";
-import { AuthContext } from "../../context/AuthContext";
 import "./SplashScreen.css";
 import SouniiButton from "../../components/SouniiButton";
 import SouniiLogo from "../../assets/images/sounii-logo.png";
 
 class SplashScreen extends Component {
-  static contextType = AuthContext;
-
   state = {
     showLogoOnly: true, // Step 1: only logo
     progress: 0,
@@ -34,7 +31,6 @@ class SplashScreen extends Component {
       this.setState((prev) => {
         if (prev.progress >= 100) {
           clearInterval(this.interval);
-          this.handleNavigation();
           return { progress: 100, loading: false, completed: true };
         }
         return { progress: prev.progress + 2 };
@@ -43,14 +39,9 @@ class SplashScreen extends Component {
   };
 
   handleNavigation = () => {
-  // Only auto-redirect on first load
-  if (this.context?.user) {
-    this.props.navigate("/home");
-  } else {
+    // Navigate to login directly
     this.props.navigate("/login");
-  }
-};
-
+  };
 
   render() {
     const { showLogoOnly, progress, loading, completed } = this.state;

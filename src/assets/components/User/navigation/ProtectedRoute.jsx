@@ -1,20 +1,9 @@
-import React, { Component } from "react";
-import { Navigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
+import React, { Component } from 'react'
 
-class ProtectedRoute extends Component {
-  static contextType = AuthContext;
-
+export default class ProtectedRoute extends Component {
   render() {
-    const { user, loading } = this.context;
-    const { children } = this.props;
-
-    if (loading) return <div>Loading...</div>; // or a loader component
-
-    if (!user) return <Navigate to="/login" replace />;
-
-    return children;
+    return (
+      <div>ProtectedRoute</div>
+    )
   }
 }
-
-export default ProtectedRoute;

@@ -1,15 +1,9 @@
-// services/index.js
+import React, { Component } from 'react'
 
-// Import each service
-import { userService } from './UserService';
-import { musicService } from './MusicService';
-import { communityService } from './CommunityService';
-import { walletService } from './WalletService';
-
-// Export them together
-export {
-  userService,
-  musicService,
-  communityService,
-  walletService,
-};
+export default class index extends Component {
+  render() {
+    return (
+      <div>index</div>
+    )
+  }
+}

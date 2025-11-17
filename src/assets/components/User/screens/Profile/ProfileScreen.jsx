@@ -5,7 +5,26 @@ import EditProfileForm from "./components/EditProfileForm.jsx";
 import "./profile.css";
 
 export default class ProfileScreen extends Component {
+  constructor(props) {
+    super(props);
+
+    // Get user from props or fallback to localStorage
+    const savedUser = props.user || JSON.parse(localStorage.getItem("user")) || {};
+
+    this.state = {
+      user: savedUser,
+    };
+  }
+
+  handleUserUpdate = (updatedData) => {
+    // Update state and localStorage
+    this.setState({ user: updatedData });
+    localStorage.setItem("user", JSON.stringify(updatedData));
+  };
+
   render() {
+    const { user } = this.state;
+
     return (
       <div className="min-h-screen bg-gradient-to-r from-black via-white to-orange-500 text-white">
         {/* Header */}
@@ -16,13 +35,13 @@ export default class ProfileScreen extends Component {
         {/* Main content */}
         <main className="p-4 space-y-8">
           {/* Profile Info */}
-          <ProfileHeader />
+          <ProfileHeader user={user} />
 
           {/* User Statistics */}
-          <UserStats />
+          <UserStats user={user} />
 
           {/* Edit Profile Form */}
-          <EditProfileForm />
+          <EditProfileForm user={user} onUpdate={this.handleUserUpdate} />
         </main>
       </div>
     );

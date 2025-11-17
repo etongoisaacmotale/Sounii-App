@@ -1,3 +1,4 @@
+// LoginForm.jsx
 import React, { Component } from "react";
 import "./LoginForm.css";
 import SouniiInput from "../../../../components/SouniiInput";
@@ -27,7 +28,6 @@ class LoginForm extends Component {
         this.setState({ loading: true, error: "" });
 
         try {
-            // Call parent-provided login (AuthContext → UserService)
             await this.props.onLogin(emailOrPhone, password);
         } catch (err) {
             this.setState({ error: err.message });
@@ -35,7 +35,6 @@ class LoginForm extends Component {
             this.setState({ loading: false });
         }
     };
-
 
     render() {
         const { emailOrPhone, password, loading, error } = this.state;
@@ -68,22 +67,29 @@ class LoginForm extends Component {
                     <SouniiButton text="Login" onClick={this.handleLogin} />
                 )}
 
+                {/* Forgot Password Button */}
                 <p
                     className="forgot-password-link"
-                    onClick={this.props.onForgotPassword} // ✅ navigates correctly now
-                    style={{ cursor: "pointer", color: "blue", marginTop: "10px" }}
+                    onClick={this.props.onForgotPassword}
+                    style={{
+                        cursor: "pointer",
+                        color: "blue",
+                        marginTop: "12px",
+                        fontWeight: "500",
+                    }}
                 >
                     Forgot Password?
                 </p>
 
-                <p className="login-footer">
-                    Don’t have an account?{" "}
+                {/* Register Button */}
+                <p className="login-footer" style={{ marginTop: "15px" }}>
+                    Don't have an account?{" "}
                     <span
                         className="signup-link"
                         onClick={this.props.onSignup}
-                        style={{ cursor: "pointer", color: "blue" }}
+                        style={{ cursor: "pointer", color: "blue", fontWeight: "500" }}
                     >
-                        Sign Up
+                        Register
                     </span>
                 </p>
             </div>

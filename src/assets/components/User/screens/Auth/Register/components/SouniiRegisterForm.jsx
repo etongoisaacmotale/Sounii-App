@@ -1,9 +1,7 @@
-// SouniiRegisterForm.jsx
 import React, { Component } from 'react';
 import "./SouniiRegisterForm.css";
 import SouniiInput from '../../../../components/SouniiInput';
 import SouniiButton from '../../../../components/SouniiButton';
-import { withRouter } from '../../../../HOC/withRouter';
 import Loader from '../../../../components/Loader';
 
 class SouniiRegisterForm extends Component {
@@ -13,6 +11,7 @@ class SouniiRegisterForm extends Component {
     phone: '',
     password: '',
     confirmPassword: '',
+    agreed: false,
     error: '',
     loading: false,
   };
@@ -21,13 +20,16 @@ class SouniiRegisterForm extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  handleCheckboxChange = () => {
+    this.setState({ agreed: !this.state.agreed });
+  };
+
   handleSubmit = (e) => {
     e.preventDefault();
-    const { name, email, phone, password, confirmPassword } = this.state;
+    const { name, email, phone, password, confirmPassword, agreed } = this.state;
 
-    // Validate fields
-    if (!name || (!email && !phone) || !password || !confirmPassword) {
-      this.setState({ error: 'Please fill in all required fields' });
+    if (!name || !email || !phone || !password || !confirmPassword) {
+      this.setState({ error: 'Please fill in all fields' });
       return;
     }
 
@@ -36,33 +38,33 @@ class SouniiRegisterForm extends Component {
       return;
     }
 
+    if (!agreed) {
+      this.setState({ error: 'You must agree to the Terms & Conditions' });
+      return;
+    }
+
     this.setState({ error: '', loading: true });
 
-    // Simulate async registration
     setTimeout(() => {
-      // Save user locally
       const user = { name, email, phone, password };
-      localStorage.setItem('souniiUser', JSON.stringify(user));
-
+      localStorage.setItem('user', JSON.stringify(user));
       this.setState({ loading: false });
+
       alert(`Account created for ${name} (${email || phone})`);
 
-      // Redirect to login
-      if (this.props.navigate) this.props.navigate("/login");
+      if (this.props.onRegister) this.props.onRegister({ name, email, phone, password });
     }, 800);
   };
 
-  handleLoginLink = () => {
-    if (this.props.navigate) this.props.navigate("/login");
+  handleBackToLogin = () => {
+    if (this.props.onBackToLogin) this.props.onBackToLogin();
   };
 
   render() {
-    const { name, email, phone, password, confirmPassword, error, loading } = this.state;
+    const { name, email, phone, password, confirmPassword, agreed, error, loading } = this.state;
 
     return (
       <div className="register-form-container">
-        <h2 className="register-title">Create Your Sounii Account</h2>
-
         <form onSubmit={this.handleSubmit}>
           <SouniiInput
             name="name"
@@ -75,7 +77,7 @@ class SouniiRegisterForm extends Component {
             type="email"
             value={email}
             onChange={this.handleChange}
-            placeholder="Email (optional)"
+            placeholder="Email"
           />
           <SouniiInput
             name="phone"
@@ -99,6 +101,19 @@ class SouniiRegisterForm extends Component {
             placeholder="Confirm Password"
           />
 
+          {/* Terms & Conditions */}
+          <div className="terms-checkbox" style={{ marginTop: '10px' }}>
+            <input
+              type="checkbox"
+              checked={agreed}
+              onChange={this.handleCheckboxChange}
+              id="terms"
+            />
+            <label htmlFor="terms" style={{ marginLeft: '8px' }}>
+              I agree to the Sounii Terms & Conditions
+            </label>
+          </div>
+
           {error && <p className="error-text">{error}</p>}
 
           {loading ? (
@@ -110,15 +125,17 @@ class SouniiRegisterForm extends Component {
           )}
         </form>
 
-        <p className="login-link">
-          Already have an account?{" "}
-          <span onClick={this.handleLoginLink} style={{ cursor: 'pointer', color: 'blue' }}>
-            Login here
-          </span>
+        {/* Back to Login */}
+        <p
+          className="back-to-login"
+          onClick={this.handleBackToLogin}
+          style={{ cursor: 'pointer', color: 'blue', marginTop: '15px' }}
+        >
+          Back to Login
         </p>
       </div>
     );
   }
 }
 
-export default withRouter(SouniiRegisterForm);
+export default SouniiRegisterForm;

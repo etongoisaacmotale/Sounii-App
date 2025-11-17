@@ -1,55 +1,17 @@
-// RegisterScreen.jsx
 import React, { Component } from "react";
-import { withRouter } from "../../../HOC/withRouter";
 import "./RegisterScreen.css";
 import SouniiRegisterForm from "./components/SouniiRegisterForm";
-import TermsCheckbox from "./components/TermsCheckbox";
 import SouniiSocialLoginButtons from "../Login/components/SouniiSocialLoginButtons";
+import { withRouter } from "../../../HOC/withRouter";
 
 class RegisterScreen extends Component {
-    state = { agreed: false };
 
-    handleAgreementChange = () => {
-        this.setState({ agreed: !this.state.agreed });
+    handleRegister = (userData) => {
+        alert(`Welcome, ${userData.name}!`);
+        if (this.props.navigate) this.props.navigate("/login");
     };
 
-    handleRegister = async (data) => {
-        try {
-            const user = await this.context.register(data); // AuthContext → UserService
-            alert(`Welcome ${user.name}!`);
-            this.props.navigate("/home");
-        } catch (err) {
-            alert(err.message);
-        }
-        
-        if (!agreed) {
-            alert("You must agree to the Terms & Conditions");
-            return;
-        }
-
-        const { name, email, phone, password } = formData;
-
-        if (!name || !email || !phone || !password) {
-            alert("Please fill in all fields");
-            return;
-        }
-
-        try {
-            // Simulate delay for UX consistency
-            await new Promise((resolve) => setTimeout(resolve, 800));
-
-            // Save user locally
-            const newUser = { name, email, phone, password };
-            localStorage.setItem("user", JSON.stringify(newUser));
-
-            alert(`Welcome, ${name}! Your account has been created.`);
-            if (this.props.navigate) this.props.navigate("/home");
-        } catch (error) {
-            alert("Something went wrong. Please try again.");
-        }
-    };
-
-    handleLoginRedirect = () => {
+    handleBackToLogin = () => {
         if (this.props.navigate) this.props.navigate("/login");
     };
 
@@ -60,16 +22,14 @@ class RegisterScreen extends Component {
                     Create Your Sounii Account
                 </h1>
 
-                <SouniiRegisterForm onRegister={this.handleRegister} />
-
-                <TermsCheckbox
-                    checked={this.state.agreed}
-                    onChange={this.handleAgreementChange}
-                    label="I agree to the Sounii Terms & Conditions"
+                <SouniiRegisterForm
+                    onRegister={this.handleRegister}
+                    onBackToLogin={this.handleBackToLogin}
                 />
 
                 <div className="social-login-wrapper mt-6 w-full max-w-sm text-center">
                     <p className="divider mb-2">OR</p>
+
                     <SouniiSocialLoginButtons
                         onGoogleLogin={() => alert("Google signup clicked")}
                         onFacebookLogin={() => alert("Facebook signup clicked")}

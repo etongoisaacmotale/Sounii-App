@@ -1,32 +1,38 @@
 import React, { Component } from "react";
-import { withRouter } from "../../../HOC/withRouter";
-import { AuthContext } from "../../../context/AuthContext";
 import "./LoginScreen.css";
 import LoginForm from "./components/LoginForm";
 import SouniiSocialLoginButtons from "./components/SouniiSocialLoginButtons";
+import { withRouter } from "../../../HOC/withRouter";
 
 class LoginScreen extends Component {
-  static contextType = AuthContext; // Access login/register/logout
 
-  // Handle login via AuthContext
   handleLogin = async (emailOrPhone, password) => {
-    try {
-      const user = await this.context.login(emailOrPhone, password);
-      alert(`Welcome back, ${user.name}!`);
-      this.props.navigate("/home"); // Navigate after successful login
-    } catch (error) {
-      alert(error.message);
+    const savedUser = JSON.parse(localStorage.getItem("user"));
+
+    if (!savedUser) {
+      alert("No user found. Please register first.");
+      return;
     }
+
+    const isMatch =
+      (savedUser.email === emailOrPhone || savedUser.phone === emailOrPhone) &&
+      savedUser.password === password;
+
+    if (!isMatch) {
+      alert("Invalid email/phone or password.");
+      return;
+    }
+
+    alert(`Welcome back, ${savedUser.name}!`);
+    this.props.navigate("/home");
   };
 
-  // Navigate to registration screen
-  handleSignupRedirect = () => {
-    this.props.navigate("/register");
-  };
-
-  // Navigate to forgot password screen
-  handleForgotPasswordRedirect = () => {
+  handleForgotPassword = () => {
     this.props.navigate("/forgot-password");
+  };
+
+  handleSignup = () => {
+    this.props.navigate("/register");
   };
 
   render() {
@@ -36,12 +42,13 @@ class LoginScreen extends Component {
 
         <LoginForm
           onLogin={this.handleLogin}
-          onSignup={this.handleSignupRedirect}
-          onForgotPassword={this.handleForgotPasswordRedirect}
+          onForgotPassword={this.handleForgotPassword}
+          onSignup={this.handleSignup}
         />
 
         <div className="social-login-wrapper">
           <p className="divider">OR</p>
+
           <SouniiSocialLoginButtons
             onGoogleLogin={() => alert("Google login clicked")}
             onFacebookLogin={() => alert("Facebook login clicked")}

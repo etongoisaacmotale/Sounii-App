@@ -4,7 +4,7 @@ import TrendingSection from "./components/TrendingSection";
 import MiniPlayer from "./components/MiniPlayer";
 import SearchBar from "../Search/components/SearchBar";
 import SearchFilters from "../Search/components/SearchFilters";
-import MainTabs from "../../navigation/MainTabs"; // import MainTabs
+import MainTabs from "../../navigation/MainTabs";
 import { withRouter } from "../../HOC/withRouter";
 import "./HomeScreen.css";
 
@@ -44,12 +44,12 @@ class HomeScreen extends Component {
     }
   };
 
-  getGreeting() {
+  getGreeting = () => {
     const hour = new Date().getHours();
     if (hour < 12) return "Good Morning 🌅";
     if (hour < 18) return "Good Afternoon ☀️";
     return "Good Evening 🌙";
-  }
+  };
 
   handleSearch = (query) => {
     this.setState({ query }, this.applyFilters);
@@ -82,7 +82,7 @@ class HomeScreen extends Component {
   };
 
   handleNavigate = (path) => {
-    this.props.navigate(path);
+    this.props.navigate(path); // from withRouter
     this.setState({ showMoreDropdown: false });
   };
 
@@ -98,7 +98,7 @@ class HomeScreen extends Component {
     ];
 
     return (
-      <div className="home-container pb-20"> {/* padding-bottom to avoid overlap with tabs */}
+      <div className="home-container pb-20">
         <header className="home-header">
           <h1>Sounii</h1>
           <div style={{ position: "relative" }} ref={this.dropdownRef}>
@@ -134,7 +134,6 @@ class HomeScreen extends Component {
 
         <MiniPlayer />
 
-        {/* MainTabs at the bottom */}
         <MainTabs onMoreClick={this.toggleMoreDropdown} />
       </div>
     );

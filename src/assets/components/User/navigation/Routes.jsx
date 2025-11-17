@@ -6,7 +6,7 @@ import AppLayout from "../layouts/AppLayout";
 import SplashScreen from "../screens/Splash/SplashScreen";
 import LoginScreen from "../screens/Auth/Login/LoginScreen";
 import RegisterScreen from "../screens/Auth/Register/RegisterScreen";
-import ForgotPasswordScreen from "../screens/Auth/ForgotPasswordScreen";
+import ForgotPasswordScreen from "../screens/Auth/ForgotPassword/ForgotPasswordScreen";
 
 import HomeScreen from "../screens/Home/HomeScreen";
 import SearchScreen from "../screens/Search/SearchScreen";
@@ -14,28 +14,20 @@ import LibraryScreen from "../screens/Library/LibraryScreen";
 import CommunityScreen from "../screens/Community/CommunityScreen";
 import EventsScreen from "../screens/Events/EventsScreen";
 
-import AuthGuard from "../components/AuthGuard";
-
-export default class Routes extends Component {
+export default class AppNavigator extends Component {
   render() {
     return (
       <Routes>
-        {/* Splash screen - shown first */}
+        {/* Splash */}
         <Route path="/splash" element={<SplashScreen />} />
 
-        {/* Public routes */}
+        {/* Auth Screens (now public) */}
         <Route path="/login" element={<LoginScreen />} />
         <Route path="/register" element={<RegisterScreen />} />
         <Route path="/forgot-password" element={<ForgotPasswordScreen />} />
 
-        {/* Protected routes (require login) */}
-        <Route
-          element={
-            <AuthGuard>
-              <AppLayout />
-            </AuthGuard>
-          }
-        >
+        {/* App Layout (no AuthGuard) */}
+        <Route element={<AppLayout />}>
           <Route path="/home" element={<HomeScreen />} />
           <Route path="/search" element={<SearchScreen />} />
           <Route path="/library" element={<LibraryScreen />} />
@@ -43,10 +35,10 @@ export default class Routes extends Component {
           <Route path="/events" element={<EventsScreen />} />
         </Route>
 
-        {/* Default route: start at Splash */}
+        {/* Default route */}
         <Route path="/" element={<Navigate to="/splash" replace />} />
 
-        {/* Catch all unknown paths */}
+        {/* Unknown routes */}
         <Route path="*" element={<Navigate to="/splash" replace />} />
       </Routes>
     );
