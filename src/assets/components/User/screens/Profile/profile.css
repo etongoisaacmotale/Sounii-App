@@ -1,5 +1,151 @@
-/* profile.css */
 body {
-  scroll-behavior: smooth;
-  background: linear-gradient(to right, black, white, orange);
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #000; /* fully black background */
+  color: #fff; /* main text white */
+}
+
+.profile-container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+.profile-header h1 {
+  color: white;
+}
+
+.profile-card {
+  display: flex;
+  gap: 30px;
+  padding: 20px;
+  background: #111;
+  border-radius: 10px;
+  flex-wrap: wrap;
+}
+
+.photo-section {
+  flex: 1;
+  text-align: center;
+}
+
+.profile-photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 100%;
+  object-fit: cover;
+  border: 3px solid #444;
+}
+
+.upload-btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 14px;
+  background: #333;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #fff; /* more visible */
+  border: 1px solid #666;
+}
+
+.upload-btn input {
+  display: none;
+}
+
+.info-section {
+  flex: 2;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+  color: #ddd;
+}
+
+.input-group input,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  background: #222;
+  color: white;
+}
+
+.button-row {
+  display: flex;
+  gap: 10px;
+}
+
+.save-btn {
+  background: #0a84ff;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  color: white;
+}
+
+.delete-btn {
+  background: crimson;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  color: white;
+}
+
+.section {
+  margin-top: 40px;
+  background: #111;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.section h2 {
+  color: #fff;
+}
+
+.list {
+  margin: 0;
+  padding-left: 20px;
+  color: #ccc;
+}
+
+.logout-btn.logout-bottom {
+  width: 100%;
+  margin-top: 40px;
+  background: rgb(255, 85, 85);
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  color: white;
+}
+
+/* RESPONSIVE MOBILE VIEW */
+@media (max-width: 600px) {
+  .profile-card {
+    flex-direction: column;
+    padding: 15px;
+  }
+
+  .profile-photo {
+    width: 120px;
+    height: 120px;
+  }
+
+  .button-row {
+    flex-direction: column;
+  }
+
+  .logout-bottom {
+    margin-bottom: 40px;
+  }
 }
