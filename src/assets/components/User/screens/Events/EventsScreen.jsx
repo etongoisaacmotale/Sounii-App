@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import EventCard from "./components/EventCard.jsx";
 import "./EventsScreen.css"; // Make sure to create this CSS file
-
+import MainTabs from "../../navigation/MainTabs.jsx";
 // Sample events
 const sampleEvents = [
   {
@@ -104,7 +104,9 @@ export default class EventsScreen extends Component {
             <p className="no-events-msg">No events to display.</p>
           )}
         </div>
+          <MainTabs onMoreClick={this.toggleMoreDropdown} />
       </div>
     );
+    
   }
 }

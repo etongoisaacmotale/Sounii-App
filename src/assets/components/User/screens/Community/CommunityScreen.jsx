@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import CommunitySection from "./components/CommunitySection.jsx";
 import MiniPlayer from "../Home/components/MiniPlayer.jsx";
+import MainTabs from "../../navigation/MainTabs.jsx";
 import "./CommunityScreen.css";
 
 export default class CommunityScreen extends Component {
@@ -21,6 +22,7 @@ export default class CommunityScreen extends Component {
         {/* MiniPlayer */}
         <div className="community-miniplayer">
           <MiniPlayer />
+          <MainTabs onMoreClick={this.toggleMoreDropdown} />
         </div>
       </div>
     );

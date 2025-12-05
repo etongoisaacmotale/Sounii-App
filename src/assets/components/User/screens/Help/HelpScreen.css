@@ -2,7 +2,7 @@
 .help-screen-container {
   min-height: 100vh;
   background: linear-gradient(to bottom, #111, #222, #333);
-  color: #ffb84d;
+  color: #ff7a00;
   padding: 20px;
 }
 
@@ -19,7 +19,7 @@
 .help-header h1 {
   font-size: 2rem;
   font-weight: bold;
-  color: orange;
+  color: #ff7a00;
 }
 
 .help-content {
@@ -35,7 +35,7 @@
 
 h2 {
   font-size: 1.5rem;
-  color: orange;
+  color: #ff7a00;
   margin-bottom: 10px;
 }
 

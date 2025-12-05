@@ -1,0 +1,68 @@
+.tx-container {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px);
+  padding: 28px;
+  border-radius: 22px;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.4);
+  margin: 30px auto;
+  max-width: 720px;
+}
+
+.tx-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 800;
+  color: #ff7a00;
+  margin-bottom: 20px;
+}
+
+.tx-empty {
+  text-align: center;
+  color: #cccccc;
+  font-size: 16px;
+}
+
+.tx-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tx-item {
+  background: rgba(0, 0, 0, 0.45);
+  padding: 16px;
+  border-radius: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.2s ease;
+  margin-bottom: 12px;
+}
+
+.tx-item:hover {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.tx-type {
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+}
+
+.tx-date {
+  font-size: 14px;
+  color: #bbbbbb;
+}
+
+.tx-amount {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.income {
+  color: #4caf50;
+}
+
+.expense {
+  color: #e53935;
+}

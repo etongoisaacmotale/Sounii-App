@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./NotificationSettings.css"; // <-- import the CSS file
 
 export default class NotificationSettings extends Component {
   state = {
@@ -17,37 +18,43 @@ export default class NotificationSettings extends Component {
   handleToggle = (field) => {
     this.setState(
       (prevState) => ({ [field]: !prevState[field] }),
-      () => {
-        localStorage.setItem("notificationSettings", JSON.stringify(this.state));
-      }
+      () =>
+        localStorage.setItem(
+          "notificationSettings",
+          JSON.stringify(this.state)
+        )
     );
   };
 
-  renderToggle = (label, field) => (
-    <label className="flex items-center justify-between bg-black/40 rounded-lg p-3 mb-3 hover:bg-black/60 transition-all">
-      <span className="text-white font-medium">{label}</span>
-      <input
-        type="checkbox"
-        checked={this.state[field]}
-        onChange={() => this.handleToggle(field)}
-        className="accent-orange-500 w-5 h-5"
-      />
-    </label>
-  );
+  renderToggle(label, field) {
+    return (
+      <label className="toggle-row">
+        <span className="toggle-label">{label}</span>
+
+        {/* Toggle Switch */}
+        <div className="switch">
+          <input
+            type="checkbox"
+            checked={this.state[field]}
+            onChange={() => this.handleToggle(field)}
+          />
+          <span className="slider"></span>
+        </div>
+      </label>
+    );
+  }
 
   render() {
     return (
-      <div className="min-h-screen bg-gradient-to-r from-black via-white to-orange-500 text-white p-6">
+      <div className="ns-screen">
         {/* Header */}
-        <header className="p-4 bg-black/70 backdrop-blur-md rounded-lg shadow-lg mb-6 flex justify-between items-center">
-          <h2 className="text-3xl font-bold">Notification Settings</h2>
+        <header className="ns-header">
+          <h2 className="ns-title">Notification Settings</h2>
         </header>
 
-        {/* Settings List */}
-        <div className="bg-black/60 backdrop-blur-md p-6 rounded-2xl shadow-lg space-y-3">
-          <h3 className="text-2xl font-semibold mb-4 text-orange-400">
-            Manage Notifications
-          </h3>
+        {/* Content */}
+        <div className="ns-card">
+          <h3 className="ns-section-title">Manage Notifications</h3>
 
           {this.renderToggle("New Music Alerts", "newMusicAlerts")}
           {this.renderToggle("Artist Posts & Updates", "artistPosts")}
@@ -56,12 +63,10 @@ export default class NotificationSettings extends Component {
           {this.renderToggle("App Updates", "appUpdates")}
         </div>
 
-        {/* Save Button */}
+        {/* Save button */}
         <button
-          onClick={() =>
-            alert("Notification preferences saved successfully!")
-          }
-          className="mt-6 w-full bg-orange-500 text-black font-bold py-3 rounded-lg hover:bg-orange-600 transition-colors"
+          className="ns-save-btn"
+          onClick={() => alert("Notification preferences saved!")}
         >
           Save Preferences
         </button>

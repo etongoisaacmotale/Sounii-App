@@ -1,0 +1,31 @@
+.wallet-screen {
+  min-height: 100vh;
+  background: linear-gradient(to right, black, #ff7a00);
+  padding: 24px;
+  color: white;
+}
+
+/* Header */
+.wallet-header {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(14px);
+  padding: 18px;
+  border-radius: 12px;
+  margin-bottom: 28px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wallet-title {
+  font-size: 32px;
+  font-weight: 800;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+}
+
+/* Sections */
+.wallet-section {
+  margin-top: 26px;
+}

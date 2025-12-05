@@ -3,6 +3,7 @@ import LikedSongs from "./components/LikedSongs.jsx";
 import Playlist from "./components/Playlist.jsx";
 import RecentlyPlayed from "./components/RecentlyPlayed.jsx";
 import "./LibraryScreen.css";
+import MainTabs from "../../navigation/MainTabs.jsx";
 
 export default class LibraryScreen extends Component {
   state = {
@@ -51,6 +52,8 @@ export default class LibraryScreen extends Component {
           {activeTab === "playlists" && <Playlist />}
           {activeTab === "recent" && <RecentlyPlayed />}
         </main>
+
+        <MainTabs onMoreClick={this.toggleMoreDropdown} />
       </div>
     );
   }

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./AccountSettings.css";
 
 export default class AccountSettings extends Component {
   state = {
@@ -51,65 +52,59 @@ export default class AccountSettings extends Component {
     } = this.state;
 
     return (
-      <div className="min-h-screen bg-gradient-to-r from-black via-white to-orange-500 text-white p-6">
-        <header className="p-4 bg-black/70 backdrop-blur-md rounded-lg shadow-lg mb-6">
-          <h2 className="text-3xl font-bold">Account Settings</h2>
+      <div className="settings-screen">
+        <header className="settings-header">
+          <h2 className="settings-title">Account Settings</h2>
         </header>
 
-        <form
-          onSubmit={this.handleSave}
-          className="space-y-8 bg-black/60 backdrop-blur-md p-6 rounded-2xl shadow-lg"
-        >
+        <form onSubmit={this.handleSave} className="settings-form">
+          
           {/* Notifications */}
           <div>
-            <h3 className="text-2xl font-semibold mb-3 text-orange-400">
-              Notifications
-            </h3>
-            <div className="flex flex-col gap-3">
-              <label className="flex items-center justify-between">
-                <span>Email Notifications</span>
-                <input
-                  type="checkbox"
-                  checked={emailNotifications}
-                  onChange={() => this.handleToggle("emailNotifications")}
-                />
-              </label>
-              <label className="flex items-center justify-between">
-                <span>Push Notifications</span>
-                <input
-                  type="checkbox"
-                  checked={pushNotifications}
-                  onChange={() => this.handleToggle("pushNotifications")}
-                />
-              </label>
+            <h3 className="settings-section-title">Notifications</h3>
+
+            <div className="settings-toggle-row">
+              <label>Email Notifications</label>
+              <input
+                type="checkbox"
+                checked={emailNotifications}
+                onChange={() => this.handleToggle("emailNotifications")}
+              />
+            </div>
+
+            <div className="settings-toggle-row">
+              <label>Push Notifications</label>
+              <input
+                type="checkbox"
+                checked={pushNotifications}
+                onChange={() => this.handleToggle("pushNotifications")}
+              />
             </div>
           </div>
 
           {/* Appearance */}
           <div>
-            <h3 className="text-2xl font-semibold mb-3 text-orange-400">
-              Appearance
-            </h3>
-            <label className="flex items-center justify-between">
-              <span>Dark Mode</span>
+            <h3 className="settings-section-title">Appearance</h3>
+
+            <div className="settings-toggle-row">
+              <label>Dark Mode</label>
               <input
                 type="checkbox"
                 checked={darkMode}
                 onChange={() => this.handleToggle("darkMode")}
               />
-            </label>
+            </div>
           </div>
 
           {/* Privacy */}
           <div>
-            <h3 className="text-2xl font-semibold mb-3 text-orange-400">
-              Privacy
-            </h3>
+            <h3 className="settings-section-title">Privacy</h3>
+
             <select
               name="privacy"
               value={privacy}
               onChange={this.handleChange}
-              className="w-full p-2 rounded-md bg-black/40 text-white"
+              className="settings-select"
             >
               <option value="public">Public</option>
               <option value="friends">Friends Only</option>
@@ -117,34 +112,31 @@ export default class AccountSettings extends Component {
             </select>
           </div>
 
-          {/* Password Update */}
+          {/* Password */}
           <div>
-            <h3 className="text-2xl font-semibold mb-3 text-orange-400">
-              Change Password
-            </h3>
+            <h3 className="settings-section-title">Change Password</h3>
+
             <input
               type="password"
               name="password"
               placeholder="New Password"
               value={password}
               onChange={this.handleChange}
-              className="w-full p-2 mb-2 rounded-md bg-black/40 text-white"
+              className="settings-input"
             />
+
             <input
               type="password"
               name="confirmPassword"
               placeholder="Confirm Password"
               value={confirmPassword}
               onChange={this.handleChange}
-              className="w-full p-2 rounded-md bg-black/40 text-white"
+              className="settings-input"
             />
           </div>
 
-          {/* Save Button */}
-          <button
-            type="submit"
-            className="w-full bg-orange-500 text-black font-bold py-3 rounded-lg hover:bg-orange-600 transition-colors"
-          >
+          {/* Save */}
+          <button type="submit" className="settings-save-btn">
             Save Changes
           </button>
         </form>

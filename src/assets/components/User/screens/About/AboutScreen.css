@@ -1,0 +1,70 @@
+/* Screen */
+.about-screen {
+  min-height: 100vh;
+  background: linear-gradient(to right, black, #1a1a1a, #ff7a00);
+  color: white;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.about-header {
+  background: rgba(0, 0, 0, 0.75);
+  padding: 18px;
+  border-radius: 14px;
+  backdrop-filter: blur(14px);
+  margin-bottom: 24px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+
+.about-title {
+  font-size: 32px;
+  font-weight: 800;
+  margin: 0;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+}
+
+/* Content */
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Sections */
+.about-section {
+  background: rgba(0, 0, 0, 0.55);
+  padding: 24px;
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.about-section-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ff8a1c;
+  margin-bottom: 12px;
+}
+
+.about-text {
+  color: #d1d1d1;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.about-list {
+  list-style: disc;
+  padding-left: 20px;
+  color: #d1d1d1;
+}
+
+.about-list li {
+  margin-bottom: 6px;
+}
+
+.about-contact {
+  color: #ff7a00;
+  font-weight: 600;
+}
