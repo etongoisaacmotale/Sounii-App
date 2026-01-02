@@ -20,11 +20,12 @@ export default class AppLayout extends Component {
     const { currentSong } = this.context;
 
     return (
-      <div className="h-screen bg-black text-white relative overflow-hidden">
-        {/* Screen content */}
+      <div className="h-screen bg-black text-white relative">
+
+        {/* Scrollable screen content */}
         <div
           style={{
-            paddingBottom: currentSong ? "140px" : "70px",
+            paddingBottom: currentSong ? "140px" : "70px", // leave space for MiniPlayer + MainTabs
             height: "100%",
             overflowY: "auto",
           }}
@@ -32,16 +33,16 @@ export default class AppLayout extends Component {
           <Outlet />
         </div>
 
+        {/* Bottom Tabs (always fixed) */}
+        <MainTabs onMoreClick={this.toggleMore} />
 
-        {/* Mini Player (ONLY when playing) */}
+        {/* MiniPlayer fixed above tabs */}
         {currentSong && <MiniPlayer />}
-
+        
         {/* More modal */}
         {this.state.showMore && <MoreModal onClose={this.toggleMore} />}
-
-        {/* Bottom Tabs */}
-        <MainTabs onMoreClick={this.toggleMore} />
       </div>
     );
   }
 }
+

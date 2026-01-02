@@ -1,29 +1,20 @@
-/* ---------------- MINIPLAYER ---------------- */
 .mini-player {
   position: fixed;
-  bottom: 56px; /* leave space for MainTabs (adjust if tabs height changes) */
+  bottom: 60px;
   left: 0;
-  width: 100%;
-  background-color: #000;
+  right: 0;
+  background: #121212;
+  color: #fff;
+  height: 80px;
   display: flex;
   align-items: center;
   padding: 8px 16px;
-  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.7);
-  color: #fff;
-  font-family: 'Arial', sans-serif;
-  z-index: 50;
   gap: 12px;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  border-top: 1px solid #282828;
+  z-index: 999;
+  cursor: pointer;
 }
 
-/* Hide when no song is playing */
-.mini-player.hidden {
-  transform: translateY(100%);
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* Thumbnail */
 .mini-player-thumb {
   width: 48px;
   height: 48px;
@@ -32,100 +23,67 @@
   flex-shrink: 0;
 }
 
-/* Song info + progress bar */
 .mini-player-info {
   flex: 1;
   display: flex;
+  margin-left: 12px;
   flex-direction: column;
-  gap: 4px;
-  min-width: 0;
+  overflow: hidden;
 }
 
 .mini-player-title {
-  font-weight: bold;
-  color: #ff6600;
   font-size: 14px;
+  font-weight: bold;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .mini-player-artist {
   font-size: 12px;
-  color: #fff;
-  opacity: 0.8;
+  opacity: 0.7;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  margin-bottom: 4px;
 }
 
-/* Progress bar */
+/* Progress Bar */
 .mini-player-progress-bar {
   width: 100%;
-  height: 4px;
-  background-color: #333;
+  height: 3px;
+  background: #535353;
   border-radius: 2px;
-  margin-top: 4px;
   cursor: pointer;
 }
 
 .mini-player-progress {
   height: 100%;
-  background-color: #ff6600;
+  background: #1db954;
   border-radius: 2px;
-  transition: width 0.2s ease;
 }
 
-/* Controls */
-.mini-player-controls {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.mini-player-controls button {
-  background-color: #ff6600;
-  border: none;
-  border-radius: 50%;
+/* Play/Pause Button */
+.play-btn {
+  background: #ffffff;
   color: #000;
-  font-size: 16px;
+  border-radius: 50%;
   width: 36px;
   height: 36px;
-  cursor: pointer;
   display: flex;
-  justify-content: center;
   align-items: center;
-  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform 0.2s;
 }
 
-.mini-player-controls button:hover {
+.play-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.play-btn:hover {
   transform: scale(1.1);
-  box-shadow: 0 0 8px #ff6600;
-}
-
-.mini-player-controls button.active {
-  background-color: #ff6600;
-  color: #000;
-}
-
-/* Responsive adjustments */
-@media (max-width: 400px) {
-  .mini-player-thumb {
-    width: 40px;
-    height: 40px;
-  }
-
-  .mini-player-title {
-    font-size: 13px;
-  }
-
-  .mini-player-artist {
-    font-size: 11px;
-  }
-
-  .mini-player-controls button {
-    width: 32px;
-    height: 32px;
-    font-size: 14px;
-  }
 }
