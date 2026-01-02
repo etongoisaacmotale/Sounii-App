@@ -28,6 +28,7 @@
 }
 
 .artwork-section {
+  flex-shrink: 0;
   display: flex;
   justify-content: center;
   margin: 40px 0;
@@ -75,6 +76,7 @@
 
 /* Controls container */
 .controls-wrapper {
+  flex-shrink: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -224,6 +226,7 @@
 }
 
 .extended-info {
+  flex-shrink: 0;
   margin-top: 32px;
   display: flex;
   flex-direction: column;
