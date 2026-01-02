@@ -1,12 +1,23 @@
 import React, { Component } from "react";
-import SongCard from "./SongCard.jsx";
+import SongCard from "../../../components/SongCard";
+import PlayerContext from "../../../player/PlayerContext";
 import "./Sections.css";
 
 export default class RecommendedSection extends Component {
-  render() {
-    const songs = this.props.songs || [];
+  static contextType = PlayerContext;
 
-    if (!songs.length) return null;
+  render() {
+    const { songs = [] } = this.props;
+    const { currentSong } = this.context;
+
+    if (!songs.length) {
+      return (
+        <div className="section-container">
+          <h2 className="section-title">Recommended for You</h2>
+          <p className="section-empty">No recommendations available yet.</p>
+        </div>
+      );
+    }
 
     return (
       <div className="section-container">

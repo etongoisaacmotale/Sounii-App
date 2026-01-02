@@ -1,10 +1,8 @@
 import React, { Component, createRef } from "react";
 import RecommendedSection from "./components/RecommendedSection";
 import TrendingSection from "./components/TrendingSection";
-import MiniPlayer from "./components/MiniPlayer";
 import SearchBar from "../Search/components/SearchBar";
 import SearchFilters from "../Search/components/SearchFilters";
-import MainTabs from "../../navigation/MainTabs";
 import { withRouter } from "../../HOC/withRouter";
 import "./HomeScreen.css";
 
@@ -132,9 +130,6 @@ class HomeScreen extends Component {
           <TrendingSection songs={filteredSongs} />
         </main>
 
-        <MiniPlayer />
-
-        <MainTabs onMoreClick={this.toggleMoreDropdown} />
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import CommunitySection from "./components/CommunitySection.jsx";
-import MiniPlayer from "../Home/components/MiniPlayer.jsx";
+import MiniPlayer from "../../components/player/MiniPlayer.jsx";
 import MainTabs from "../../navigation/MainTabs.jsx";
 import "./CommunityScreen.css";
 
@@ -18,12 +18,6 @@ export default class CommunityScreen extends Component {
         <main className="community-main">
           <CommunitySection />
         </main>
-
-        {/* MiniPlayer */}
-        <div className="community-miniplayer">
-          <MiniPlayer />
-          <MainTabs onMoreClick={this.toggleMoreDropdown} />
-        </div>
       </div>
     );
   }

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import SongCard from "../../Home/components/SongCard";
+import SongCard from "../../../components/SongCard";
 import "./LibraryComponents.css";
 
 const likedSongsData = [

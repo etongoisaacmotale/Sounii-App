@@ -1,0 +1,29 @@
+.player-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+  margin-top: 20px;
+}
+
+.player-controls button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 26px;
+  color: #1db954;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.player-controls button:hover {
+  transform: scale(1.2);
+  color: #1fff80;
+}
+
+.player-controls .play-btn {
+  font-size: 34px;
+}
+
+.player-controls button:focus {
+  outline: none;
+}

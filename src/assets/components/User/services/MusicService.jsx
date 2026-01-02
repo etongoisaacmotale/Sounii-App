@@ -1,9 +1,8 @@
-import React, { Component } from 'react'
+// ❌ NOT a component
+// ✅ Utility functions only
 
-export default class MusicService extends Component {
-  render() {
-    return (
-      <div>MusicService</div>
-    )
-  }
-}
+export const createAudio = (src) => {
+  const audio = new Audio(src);
+  audio.preload = "metadata";
+  return audio;
+};
