@@ -1,4 +1,7 @@
 import React, { Component, createRef } from "react";
+import RecentlyPlayed from "./components/RecentlyPlayed";
+import PopularArtists from "./components/PopularArtists";
+import NewRealeses from "./components/NewRealeses";
 import RecommendedSection from "./components/RecommendedSection";
 import TrendingSection from "./components/TrendingSection";
 import SearchBar from "../Search/components/SearchBar";
@@ -126,8 +129,11 @@ class HomeScreen extends Component {
         </div>
 
         <main className="home-main">
+          <RecentlyPlayed songs={filteredSongs} />
           <RecommendedSection songs={filteredSongs} />
           <TrendingSection songs={filteredSongs} />
+          <NewRealeses songs={filteredSongs} />
+          <PopularArtists songs={filteredSongs} />
         </main>
 
       </div>

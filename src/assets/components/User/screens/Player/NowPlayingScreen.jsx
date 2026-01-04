@@ -14,21 +14,24 @@ export default class NowPlayingScreen extends Component {
 
     menuRef = React.createRef();
 
-    // Lifecycle
     componentDidMount() {
         document.addEventListener("click", this.handleOutsideClick);
+
+        // Subscribe to player time updates
+        this.intervalId = setInterval(() => {
+            if (this.context.currentTime !== this.state.currentTime) {
+                this.setState({ currentTime: this.context.currentTime });
+            }
+        }, 500); // update every 0.5s
     }
 
     componentWillUnmount() {
         document.removeEventListener("click", this.handleOutsideClick);
+        clearInterval(this.intervalId);
     }
 
-    // Menu control
-    toggleOptions = (e) => {
-        e.stopPropagation();
-        this.setState((prev) => ({ showOptions: !prev.showOptions }));
-    };
 
+    // Handle outside click for options menu
     handleOutsideClick = (e) => {
         if (
             this.state.showOptions &&
@@ -37,6 +40,11 @@ export default class NowPlayingScreen extends Component {
         ) {
             this.setState({ showOptions: false });
         }
+    };
+
+    toggleOptions = (e) => {
+        e.stopPropagation();
+        this.setState((prev) => ({ showOptions: !prev.showOptions }));
     };
 
     // Player controls
@@ -78,7 +86,6 @@ export default class NowPlayingScreen extends Component {
             progress,
             likedSongs,
             toggleLike,
-            volume = 1,
             currentTime,
             duration,
         } = this.context;
@@ -153,7 +160,6 @@ export default class NowPlayingScreen extends Component {
                     </div>
                 </div>
 
-
                 {/* Progress */}
                 <div className="time-row">
                     <span>{this.formatTime(currentTime)}</span>
@@ -165,6 +171,7 @@ export default class NowPlayingScreen extends Component {
 
                 {/* Advanced Controls */}
                 <div className="controls-wrapper">
+                    {/* Left Controls */}
                     <div className="side-controls">
                         <button className={`control-btn ${shuffle ? "active" : ""}`} title="Shuffle" onClick={toggleShuffle}>
                             <svg viewBox="0 0 24 24"><path d="M16 3h5v5h-2V6h-3V3zm-9.83 2.17l1.42 1.42A7.944 7.944 0 0 0 5 11h2c0-1.2.47-2.3 1.24-3.12l-1.07-1.07zm14.66 0l-1.41 1.41 1.07 1.07A7.944 7.944 0 0 1 19 11h2a7.944 7.944 0 0 0-1.24-3.12zM4 13h2c0 1.2.47 2.3 1.24 3.12l-1.42 1.42L5 17.17C4.42 16.59 4 15.82 4 15V13zm14.66 0l-1.41 1.41 1.07 1.07c.77-.82 1.24-1.92 1.24-3.12h-2zm-6.66 0l-1.42 1.42C10.47 15.3 10 14.2 10 13h2c0 1.2.47 2.3 1.24 3.12l-1.42-1.42z" /></svg>
@@ -175,6 +182,7 @@ export default class NowPlayingScreen extends Component {
                         </button>
                     </div>
 
+                    {/* Play/Pause */}
                     <button className="play-btn" onClick={() => this.context.setIsPlaying(!isPlaying)}>
                         {isPlaying ? (
                             <svg viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" /></svg>
@@ -183,6 +191,7 @@ export default class NowPlayingScreen extends Component {
                         )}
                     </button>
 
+                    {/* Right Controls */}
                     <div className="side-controls">
                         <button className="control-btn" title="Next" onClick={nextSong}>
                             <svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12z" /></svg>
@@ -194,16 +203,15 @@ export default class NowPlayingScreen extends Component {
                     </div>
                 </div>
 
-                {/* Extended Info Section */}
+                {/* Extended Info */}
                 <div className="extended-info">
-
                     {/* Lyrics */}
                     <div className="lyrics-section">
                         <h3>Lyrics</h3>
                         <p>{currentSong.lyrics || "Lyrics not available."}</p>
                     </div>
 
-                    {/* Artist Info Card */}
+                    {/* Artist Card */}
                     <div className="artist-card">
                         <img src={currentSong.artistImage} alt={currentSong.artist} />
                         <div className="artist-info">
@@ -212,15 +220,13 @@ export default class NowPlayingScreen extends Component {
                         </div>
                     </div>
 
-                    {/* Explore Artist Button */}
+                    {/* Explore Artist */}
                     <div className="explore-artist">
                         <button onClick={() => alert(`Exploring ${currentSong.artist}`)}>
                             Explore Artist
                         </button>
                     </div>
                 </div>
-
-
             </div>
         );
     }

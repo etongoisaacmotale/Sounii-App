@@ -7,6 +7,8 @@ export default class PlayerProvider extends Component {
     queue: [],
     isPlaying: false,
     progress: 0,
+    currentTime: 0, // Add currentTime to context
+    duration: 0,    // Add duration to context
     shuffle: false,
     repeat: false,
     likedSongs: [],
@@ -19,16 +21,23 @@ export default class PlayerProvider extends Component {
   componentDidMount() {
     this.audio.addEventListener("timeupdate", this.updateProgress);
     this.audio.addEventListener("ended", this.handleEnded);
+    this.audio.addEventListener("loadedmetadata", this.updateDuration);
   }
 
   componentWillUnmount() {
     this.audio.removeEventListener("timeupdate", this.updateProgress);
     this.audio.removeEventListener("ended", this.handleEnded);
+    this.audio.removeEventListener("loadedmetadata", this.updateDuration);
   }
 
   updateProgress = () => {
-    const progress = (this.audio.currentTime / this.audio.duration) * 100 || 0;
-    this.setState({ progress });
+    const { currentTime, duration } = this.audio;
+    const progress = duration ? (currentTime / duration) * 100 : 0;
+    this.setState({ currentTime, progress });
+  };
+
+  updateDuration = () => {
+    this.setState({ duration: this.audio.duration });
   };
 
   handleEnded = () => {
@@ -42,17 +51,20 @@ export default class PlayerProvider extends Component {
 
   setCurrentSong = (song) => {
     if (!song) return;
-    this.setState({ currentSong: song, isPlaying: true }, () => {
-      this.audio.src = song.url;
-      this.audio.play().catch((err) => console.error("Audio play error:", err));
-    });
+    this.setState(
+      { currentSong: song, isPlaying: true, currentTime: 0, progress: 0 },
+      () => {
+        this.audio.src = song.url;
+        this.audio.play().catch((err) => console.error("Audio play error:", err));
+      }
+    );
   };
 
   setQueue = (queue) => this.setState({ queue });
 
   setIsPlaying = (val) => {
     this.setState({ isPlaying: val }, () => {
-      if (val) this.audio.play().catch(err => console.error(err));
+      if (val) this.audio.play().catch((err) => console.error(err));
       else this.audio.pause();
     });
   };
@@ -62,7 +74,7 @@ export default class PlayerProvider extends Component {
   seek = (percent) => {
     if (!this.audio.duration) return;
     this.audio.currentTime = (percent / 100) * this.audio.duration;
-    this.setState({ progress: percent });
+    this.setState({ progress: percent, currentTime: this.audio.currentTime });
   };
 
   nextSong = () => {

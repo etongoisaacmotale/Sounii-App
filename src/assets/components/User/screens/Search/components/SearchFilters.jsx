@@ -15,7 +15,7 @@ export default class SearchFilters extends Component {
   };
 
   render() {
-    const filters = ["all", "songs", "artists", "albums", "playlists", "mood"];
+    const filters = ["Genres", "Songs", "Artists", "Albums", "Playlists", "Moods"];
 
     return (
       <div className="search-filters">
