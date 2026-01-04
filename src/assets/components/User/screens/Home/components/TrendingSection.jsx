@@ -38,7 +38,7 @@ export default class TrendingSection extends Component {
   render() {
     return (
       <div className="section-container">
-        <h2 className="section-title">🔥 Trending Now</h2>
+        <h2 className="section-title">Trending Now</h2>
         <div className="song-grid">
           {this.state.trendingSongs.map((song) => (
             <SongCard

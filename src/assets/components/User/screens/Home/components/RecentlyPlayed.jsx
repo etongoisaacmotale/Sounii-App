@@ -38,7 +38,7 @@ export default class RecentlyPlayed extends Component {
   render() {
     return (
       <div className="section-container">
-        <h2 className="section-title">⏱️ Recently Played</h2>
+        <h2 className="section-title"> Recently Played</h2>
 
         <div className="song-scroll-container">
           {this.state.recentlyPlayedSongs.map((song) => (
