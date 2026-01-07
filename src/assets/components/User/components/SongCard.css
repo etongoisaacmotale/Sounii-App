@@ -1,34 +1,37 @@
 .song-card {
   display: flex;
   align-items: center;
-  background-color: #000; /* Sounii dark background */
-  color: #fff;
-  padding: 10px;
-  border-radius: 8px;
-  margin: 8px 0;
-  gap: 10px;
-  transition: transform 0.1s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-  cursor: pointer;
-}
-
-.song-card.playing {
-  box-shadow: 0 0 12px #ff6600;
-  background-color: #1a1a1a; /* subtle darker background for currently playing */
-}
-
-.song-card:hover {
-  transform: scale(1.02);
-  box-shadow: 0 0 10px rgba(255, 102, 0, 0.5);
-}
-
-.song-card-img {
-  width: 60px;
-  height: 60px;
+  background-color: #121212; /* Spotify dark */
+  color: #ffffff;
+  padding: 10px 12px;
   border-radius: 6px;
+  margin: 6px 0;
+  gap: 12px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+
+/* Hover – subtle, no glow */
+.song-card:hover {
+  background-color: #1a1a1a;
+}
+
+/* Currently playing */
+.song-card.playing {
+  background-color: #181818;
+  border-left: 3px solid #1db954; /* Spotify green */
+}
+
+/* Album Art */
+.song-card-img {
+  width: 56px;
+  height: 56px;
+  border-radius: 4px;
   object-fit: cover;
   flex-shrink: 0;
 }
 
+/* Info */
 .song-card-info {
   flex: 1;
   display: flex;
@@ -37,9 +40,9 @@
 }
 
 .song-card-title {
-  font-weight: bold;
+  font-weight: 500;
   font-size: 14px;
-  color: #ff6600;
+  color: #ffffff;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -47,45 +50,49 @@
 
 .song-card-artist {
   font-size: 12px;
-  color: #fff;
-  opacity: 0.8;
+  color: #b3b3b3; /* Spotify secondary text */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
+/* Actions */
 .song-card-actions {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
+/* Lock icon */
 .song-lock {
   font-size: 14px;
-  color: #ff6600;
+  color: #b3b3b3;
 }
 
+/* Like button */
 .like-button {
-  background-color: #ff6600;
-  border: none;
+  background: transparent;
+  border: 1px solid #b3b3b3;
   border-radius: 50%;
-  width: 28px;
-  height: 28px;
-  font-size: 14px;
-  color: #fff;
+  width: 26px;
+  height: 26px;
+  font-size: 13px;
+  color: #b3b3b3;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: transform 0.1s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  transition: color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
 }
 
 .like-button:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 6px #ff6600;
+  color: #ffffff;
+  border-color: #ffffff;
+  transform: scale(1.05);
 }
 
+/* Liked state */
 .like-button.liked {
-  background-color: #fff;
-  color: #ff6600;
+  color: #1db954;
+  border-color: #1db954;
 }

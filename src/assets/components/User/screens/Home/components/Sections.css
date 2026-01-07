@@ -1,95 +1,239 @@
-/* Section container */
+/* ================= Section Container ================= */
 .section-container {
-  padding: 20px;
+  padding: 24px 0; /* increased vertical padding */
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px; /* bigger gap between sections */
 }
 
 /* Section title */
 .section-title {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: #ff7f00;
-  margin-bottom: 15px;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 12px 16px; /* increased margin */
 }
 
-/* Horizontal scroll container for RecommendedSection */
-.song-scroll-container {
-  display: flex;
-  gap: 15px;
-  overflow-x: auto;
-  padding-bottom: 10px;
-}
-
-/* Hide default scrollbar */
-.song-scroll-container::-webkit-scrollbar {
-  display: none;
-}
-.song-scroll-container {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-/* Grid layout for TrendingSection */
-.song-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 15px;
-}
-
-/* Optional: smooth fade-in animation */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.section-container .song-card {
-  animation: fadeIn 0.5s ease forwards;
-}
-
-/* Horizontal scroll for artists */
+/* ================= Horizontal Scroll Containers ================= */
+.song-scroll-container,
 .artist-scroll-container {
   display: flex;
-  gap: 18px;
+  gap: 20px; /* larger gap between cards */
   overflow-x: auto;
-  padding-bottom: 10px;
+  padding: 8px 16px 16px; /* increased padding for breathing room */
+  scroll-behavior: smooth;
 }
 
+/* Hide scrollbar */
+.song-scroll-container::-webkit-scrollbar,
 .artist-scroll-container::-webkit-scrollbar {
   display: none;
 }
 
+.song-scroll-container,
 .artist-scroll-container {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
 
-/* Artist card */
+/* ================= Grid Layout (Trending) ================= */
+.song-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* wider grid columns */
+  gap: 20px; /* bigger gap between cards */
+  padding: 0 16px; /* more side padding */
+}
+
+/* ================= Fade-in Animation ================= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.section-container .song-card,
+.section-container .artist-card {
+  animation: fadeIn 0.4s ease forwards;
+}
+
+/* ================= Song Cards ================= */
+.song-card {
+  display: flex;
+  align-items: center;
+  background-color: #121212;
+  color: #ffffff;
+  padding: 20px; /* increased padding */
+  gap: 18px; /* bigger gap between image & text */
+  border-radius: 8px;
+  cursor: pointer;
+  min-height: 140px; /* taller cards */
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+
+.song-scroll-container .song-card {
+  min-width: 280px; /* wider horizontal cards */
+}
+
+.song-card:hover {
+  background-color: #1a1a1a;
+}
+
+/* Song card image */
+.song-card-img {
+  width: 76px;
+  height: 76px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* Song card info */
+.song-card-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.song-card-title {
+  font-weight: 500;
+  font-size: 16.5px;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: unset;
+  white-space: normal;
+}
+
+.song-card-artist {
+  font-size: 14.5px;
+  color: #b3b3b3;
+  margin-top: 2px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  text-overflow: unset;
+  white-space: normal;
+}
+
+/* ================= Artist Cards ================= */
 .artist-card {
-  min-width: 120px;
+  min-width: 200px; /* wider artist cards */
   text-align: center;
   cursor: pointer;
-  animation: fadeIn 0.5s ease forwards;
+  animation: fadeIn 0.4s ease forwards;
 }
 
 .artist-image {
-  width: 120px;
-  height: 120px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #ff7f00;
-  transition: transform 0.3s ease;
+  transition: transform 0.2s ease;
 }
 
 .artist-card:hover .artist-image {
-  transform: scale(1.05);
+  transform: scale(1.04);
 }
 
 .artist-name {
-  margin-top: 8px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #fff;
+  margin-top: 10px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #ffffff;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: unset;
+  white-space: normal;
+}
+
+/* ================= Mobile Size Improvements ================= */
+@media (max-width: 600px) {
+
+  /* Section padding */
+  .section-container {
+    padding: 28px 0;
+    gap: 28px;
+  }
+
+  .section-title {
+    font-size: 1.6rem;
+    margin: 0 0 14px 16px;
+  }
+
+  /* Song cards */
+  .song-card {
+    padding: 24px;
+    min-height: 160px;
+    gap: 18px;
+  }
+
+  .song-card-img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .song-card-title {
+    font-size: 17px;
+    line-height: 1.4;
+  }
+
+  .song-card-artist {
+    font-size: 15px;
+  }
+
+  .song-scroll-container .song-card {
+    min-width: 320px;
+  }
+
+  /* Grid cards */
+  .song-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 22px;
+  }
+
+  /* Artist cards */
+  .artist-card {
+    min-width: 220px;
+  }
+
+  .artist-image {
+    width: 220px;
+    height: 220px;
+  }
+
+  .artist-name {
+    font-size: 1.15rem;
+    line-height: 1.4;
+  }
+}
+
+/* ================= Optional: Scroll Snap ================= */
+.song-scroll-container {
+  scroll-snap-type: x mandatory;
+}
+
+.song-scroll-container .song-card {
+  scroll-snap-align: start;
+}
+
+.artist-scroll-container {
+  scroll-snap-type: x mandatory;
+}
+
+.artist-scroll-container .artist-card {
+  scroll-snap-align: start;
 }

@@ -1,61 +1,74 @@
-/* ArtistCard.css */
+/* ArtistCard.css – Spotify style */
+
 .artist-card {
   display: flex;
   align-items: center;
-  background-color: #000;
-  color: orange;
-  border-radius: 12px;
-  padding: 10px 15px;
-  margin: 10px 0;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-  transition: transform 0.2s, box-shadow 0.2s;
+  background-color: #121212; /* Spotify dark */
+  color: #ffffff;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin: 8px 0;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
 }
 
 .artist-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 10px rgba(0,0,0,0.5);
+  background-color: #1a1a1a;
 }
 
+/* Avatar */
 .artist-avatar {
-  width: 60px;
-  height: 60px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   object-fit: cover;
-  margin-right: 15px;
+  margin-right: 14px;
 }
 
+/* Info */
 .artist-info {
   flex-grow: 1;
+  overflow: hidden;
 }
 
 .artist-name {
   margin: 0;
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .artist-followers {
   margin: 2px 0 0;
-  font-size: 14px;
-  color: #ffb84d;
+  font-size: 12px;
+  color: #b3b3b3; /* Spotify secondary text */
 }
 
+/* Follow Button */
 .follow-btn {
-  background-color: orange;
-  color: black;
-  border: none;
-  border-radius: 8px;
-  padding: 8px 14px;
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 999px; /* pill shape */
+  padding: 6px 14px;
   cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.2s, transform 0.1s;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.15s ease;
 }
 
 .follow-btn:hover {
-  background-color: #ff9900;
+  transform: scale(1.05);
+  border-color: #1db954;
+  color: #1db954;
 }
 
-.follow-btn:active {
-  background-color: #ffb84d;
-  transform: scale(0.95);
+/* Following state (optional) */
+.follow-btn.following {
+  background-color: #1db954;
+  color: #000;
+  border-color: #1db954;
 }

@@ -1,19 +1,20 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import "./SouniiRegisterForm.css";
-import SouniiInput from '../../../../components/SouniiInput';
-import SouniiButton from '../../../../components/SouniiButton';
-import Loader from '../../../../components/Loader';
+import SouniiInput from "../../../../components/SouniiInput";
+import SouniiButton from "../../../../components/SouniiButton";
+import Loader from "../../../../components/Loader";
 
 class SouniiRegisterForm extends Component {
   state = {
-    name: '',
-    email: '',
-    phone: '',
-    password: '',
-    confirmPassword: '',
+    name: "",
+    email: "",
+    phone: "",
+    password: "",
+    confirmPassword: "",
     agreed: false,
-    error: '',
+    error: "",
     loading: false,
+    showMessageBox: false,
   };
 
   handleChange = (e) => {
@@ -21,7 +22,7 @@ class SouniiRegisterForm extends Component {
   };
 
   handleCheckboxChange = () => {
-    this.setState({ agreed: !this.state.agreed });
+    this.setState((prev) => ({ agreed: !prev.agreed }));
   };
 
   handleSubmit = (e) => {
@@ -29,75 +30,69 @@ class SouniiRegisterForm extends Component {
     const { name, email, phone, password, confirmPassword, agreed } = this.state;
 
     if (!name || !email || !phone || !password || !confirmPassword) {
-      this.setState({ error: 'Please fill in all fields' });
+      this.setState({ error: "Please fill in all fields" });
       return;
     }
 
     if (password !== confirmPassword) {
-      this.setState({ error: 'Passwords do not match' });
+      this.setState({ error: "Passwords do not match" });
       return;
     }
 
     if (!agreed) {
-      this.setState({ error: 'You must agree to the Terms & Conditions' });
+      this.setState({ error: "You must agree to the Terms & Conditions" });
       return;
     }
 
-    this.setState({ error: '', loading: true });
+    this.setState({
+      error: "",
+      showMessageBox: true, // ✅ pause here
+    });
+  };
+
+  handleNext = () => {
+    const { name, email, phone, password } = this.state;
+
+    this.setState({ loading: true, showMessageBox: false });
 
     setTimeout(() => {
       const user = { name, email, phone, password };
-      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem("user", JSON.stringify(user));
+
       this.setState({ loading: false });
 
-      // ✅ Remove the browser alert
-      // alert(`Account created for ${name} (${email || phone})`);
-
-      // ✅ Use the parent’s onRegister to show your custom alert
       if (this.props.onRegister) {
-        this.props.onRegister({ name, email, phone, password });
+        this.props.onRegister(user);
       }
-    }, 800);
+    }, 4000);
   };
 
-
   handleBackToLogin = () => {
-    if (this.props.onBackToLogin) this.props.onBackToLogin();
+    if (this.props.onBackToLogin) {
+      this.props.onBackToLogin();
+    }
   };
 
   render() {
-    const { name, email, phone, password, confirmPassword, agreed, error, loading } = this.state;
+    const {
+      name,
+      email,
+      phone,
+      password,
+      confirmPassword,
+      agreed,
+      error,
+      loading,
+      showMessageBox,
+    } = this.state;
 
     return (
       <div className="register-form-container">
         <form onSubmit={this.handleSubmit}>
-          <SouniiInput
-            name="name"
-            value={name}
-            onChange={this.handleChange}
-            placeholder="Full Name"
-          />
-          <SouniiInput
-            name="email"
-            type="email"
-            value={email}
-            onChange={this.handleChange}
-            placeholder="Email"
-          />
-          <SouniiInput
-            name="phone"
-            type="tel"
-            value={phone}
-            onChange={this.handleChange}
-            placeholder="Phone Number"
-          />
-          <SouniiInput
-            name="password"
-            type="password"
-            value={password}
-            onChange={this.handleChange}
-            placeholder="Password"
-          />
+          <SouniiInput name="name" value={name} onChange={this.handleChange} placeholder="Full Name" />
+          <SouniiInput name="email" type="email" value={email} onChange={this.handleChange} placeholder="Email" />
+          <SouniiInput name="phone" type="tel" value={phone} onChange={this.handleChange} placeholder="Phone Number" />
+          <SouniiInput name="password" type="password" value={password} onChange={this.handleChange} placeholder="Password" />
           <SouniiInput
             name="confirmPassword"
             type="password"
@@ -106,38 +101,35 @@ class SouniiRegisterForm extends Component {
             placeholder="Confirm Password"
           />
 
-          {/* Terms & Conditions */}
-          <div className="terms-checkbox" style={{ marginTop: '10px' }}>
-            <input
-              type="checkbox"
-              checked={agreed}
-              onChange={this.handleCheckboxChange}
-              id="terms"
-            />
-            <label htmlFor="terms" style={{ marginLeft: '8px' }}>
-              I agree to the Sounii Terms & Conditions
-            </label>
+          {/* Terms */}
+          <div className="terms-checkbox">
+            <input type="checkbox" checked={agreed} onChange={this.handleCheckboxChange} id="terms" />
+            <label htmlFor="terms">I agree to the Sounii Terms & Conditions</label>
           </div>
 
           {error && <p className="error-text">{error}</p>}
 
           {loading ? (
-            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '15px' }}>
-              <Loader />
-            </div>
+            <Loader />
           ) : (
             <SouniiButton type="submit" text="Register" />
           )}
         </form>
 
-        {/* Back to Login */}
-        <p
-          className="back-to-login"
-          onClick={this.handleBackToLogin}
-          style={{ cursor: 'pointer', color: 'blue', marginTop: '15px' }}
-        >
+        <p className="back-to-login" onClick={this.handleBackToLogin}>
           Back to Login
         </p>
+
+        {/* ✅ MESSAGE BOX */}
+        {showMessageBox && (
+          <div className="message-box-overlay">
+            <div className="message-box">
+              <h3>Confirm Registration</h3>
+              <p>Your details look good. Press <strong>Next</strong> to continue.</p>
+              <SouniiButton text="Next" onClick={this.handleNext} />
+            </div>
+          </div>
+        )}
       </div>
     );
   }
