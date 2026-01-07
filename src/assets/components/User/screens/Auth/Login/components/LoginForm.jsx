@@ -28,13 +28,14 @@ class LoginForm extends Component {
         this.setState({ loading: true, error: "" });
 
         try {
-            await this.props.onLogin(emailOrPhone, password);
+            await this.props.onLogin(emailOrPhone, password); // parent handles inline alert
         } catch (err) {
             this.setState({ error: err.message });
         } finally {
             this.setState({ loading: false });
         }
     };
+
 
     render() {
         const { emailOrPhone, password, loading, error } = this.state;

@@ -17,8 +17,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  opacity: 0.8;
+  opacity: 0.9;
+
+  /* Add spacing between letters and words */
+  letter-spacing: 0.5px;  /* space between letters */
+  word-spacing: 4px;      /* space between words */
 }
+
 
 .top-bar button {
   background: none;

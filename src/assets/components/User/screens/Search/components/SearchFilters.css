@@ -7,13 +7,20 @@
 }
 
 .search-filters button {
-  padding: 8px 16px;
-  border-radius: 9999px; /* fully rounded */
+  padding: 6px 12px;
+  border-radius: 9999px;
   font-weight: 600;
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  flex: 0 1 auto; /* allows buttons to shrink and wrap */
+  white-space: nowrap;
+  max-width: 180px; /* prevent buttons from getting too wide */
+  min-width: 80px; /* optional, keep buttons readable */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
 }
 
 .search-filters button.default {
@@ -29,4 +36,13 @@
 .search-filters button.active {
   background-color: #ff7f00;
   color: #000;
+}
+
+/* MOBILE VIEW */
+@media (max-width: 480px) {
+  .search-filters button {
+    max-width: 120px; /* shorter max width on mobile */
+    padding: 20px 20px;
+    font-size: 0.9rem;
+  }
 }

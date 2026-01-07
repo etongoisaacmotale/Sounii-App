@@ -1,4 +1,6 @@
-/* Register Screen Container */
+/* ---------------------------------------------------
+   REGISTER SCREEN CONTAINER
+----------------------------------------------------*/
 .register-screen-container {
     display: flex;
     flex-direction: column;
@@ -10,7 +12,7 @@
     font-family: Arial, sans-serif;
 }
 
-/* Title */
+/* TITLE */
 .register-title {
     font-size: 28px;
     font-weight: bold;
@@ -19,7 +21,72 @@
     text-align: center;
 }
 
-/* Login/Back Links */
+/* INPUT GROUPS */
+.input-group {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #ffb84d;
+    font-size: 0.95rem;
+}
+
+.input-group input,
+.input-group textarea {
+    padding: 12px 14px;
+    border-radius: 6px;
+    border: none;
+    background-color: #222;
+    color: orange;
+    font-size: 0.95rem;
+}
+
+.input-group input::placeholder,
+.input-group textarea::placeholder {
+    color: #ffb84d99;
+}
+
+/* BUTTONS */
+button {
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 20px;
+    font-weight: bold;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+.register-btn {
+    background-color: orange;
+    color: #111;
+}
+
+.register-btn:hover {
+    background-color: #ff9900;
+    color: #fff;
+}
+
+.back-to-login {
+    margin-top: 15px;
+    color: orange;
+    cursor: pointer;
+    font-weight: bold;
+    transition: color 0.2s ease;
+}
+
+.back-to-login:hover {
+    color: #ff9900;
+    text-decoration: underline;
+}
+
+/* LOGIN / BACK LINKS */
 .login-text {
     font-size: 14px;
     margin-top: 15px;
@@ -41,7 +108,7 @@
     text-decoration: underline;
 }
 
-/* Social Login Section */
+/* SOCIAL LOGIN SECTION */
 .social-login-wrapper {
     width: 100%;
     max-width: 400px;
@@ -56,7 +123,7 @@
     color: #ffb84d;
 }
 
-/* Terms Checkbox */
+/* TERMS CHECKBOX */
 .terms-checkbox {
     display: flex;
     align-items: center;
@@ -68,29 +135,37 @@
 .terms-checkbox input[type="checkbox"] {
     width: 16px;
     height: 16px;
-    accent-color: orange; /* modern browsers */
+    accent-color: orange;
     cursor: pointer;
     margin-right: 8px;
 }
 
-/* Back to Login Button */
-.back-to-login {
-    margin-top: 15px;
-    color: orange;
-    cursor: pointer;
-    font-weight: bold;
-    transition: color 0.2s ease;
-}
-
-.back-to-login:hover {
-    color: #ff9900;
-    text-decoration: underline;
-}
-
-/* Error Text */
+/* ERROR & SUCCESS TEXT (for InlineAlert fallback) */
 .error-text {
     color: #ff4d4d;
     font-size: 0.85rem;
     margin-top: 10px;
     text-align: center;
+}
+
+.success-text {
+    color: #2db43f;
+    font-size: 0.85rem;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* RESPONSIVE */
+@media (max-width: 480px) {
+    .register-screen-container {
+        padding: 30px 15px;
+    }
+
+    .input-group {
+        max-width: 100%;
+    }
+
+    button {
+        width: 100%;
+    }
 }

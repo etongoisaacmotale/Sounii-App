@@ -50,11 +50,16 @@ class SouniiRegisterForm extends Component {
       localStorage.setItem('user', JSON.stringify(user));
       this.setState({ loading: false });
 
-      alert(`Account created for ${name} (${email || phone})`);
+      // ✅ Remove the browser alert
+      // alert(`Account created for ${name} (${email || phone})`);
 
-      if (this.props.onRegister) this.props.onRegister({ name, email, phone, password });
+      // ✅ Use the parent’s onRegister to show your custom alert
+      if (this.props.onRegister) {
+        this.props.onRegister({ name, email, phone, password });
+      }
     }, 800);
   };
+
 
   handleBackToLogin = () => {
     if (this.props.onBackToLogin) this.props.onBackToLogin();

@@ -3,14 +3,24 @@ import "./LoginScreen.css";
 import LoginForm from "./components/LoginForm";
 import SouniiSocialLoginButtons from "./components/SouniiSocialLoginButtons";
 import { withRouter } from "../../../HOC/withRouter";
+import InlineAlert from "./components/InlineAlert";
 
 class LoginScreen extends Component {
+  state = {
+    alertType: "",
+    alertMessage: "",
+  };
+
+  showAlert = (type, message, duration = 5000) => {
+    this.setState({ alertType: type, alertMessage: message });
+    setTimeout(() => this.setState({ alertMessage: "" }), duration);
+  };
 
   handleLogin = async (emailOrPhone, password) => {
     const savedUser = JSON.parse(localStorage.getItem("user"));
 
     if (!savedUser) {
-      alert("No user found. Please register first.");
+      this.showAlert("error", "No user found. Please register first.", 7000);
       return;
     }
 
@@ -19,12 +29,13 @@ class LoginScreen extends Component {
       savedUser.password === password;
 
     if (!isMatch) {
-      alert("Invalid email/phone or password.");
+      this.showAlert("error", "Invalid email/phone or password.", 7000);
       return;
     }
 
-    alert(`Welcome back, ${savedUser.name}!`);
-    this.props.navigate("/home");
+    this.showAlert("success", `Welcome back, ${savedUser.name}!`, 7000);
+
+    setTimeout(() => this.props.navigate("/home"), 1000);
   };
 
   handleForgotPassword = () => {
@@ -36,9 +47,14 @@ class LoginScreen extends Component {
   };
 
   render() {
+    const { alertType, alertMessage } = this.state;
+
     return (
       <div className="login-screen-container">
         <h1 className="login-title">Welcome to Sounii</h1>
+
+        {/* Inline alert inside the screen */}
+        <InlineAlert type={alertType} message={alertMessage} />
 
         <LoginForm
           onLogin={this.handleLogin}
@@ -48,11 +64,10 @@ class LoginScreen extends Component {
 
         <div className="social-login-wrapper">
           <p className="divider">OR</p>
-
           <SouniiSocialLoginButtons
-            onGoogleLogin={() => alert("Google login clicked")}
-            onFacebookLogin={() => alert("Facebook login clicked")}
-            onAppleLogin={() => alert("Apple login clicked")}
+            onGoogleLogin={() => this.showAlert("info", "Google login clicked!", 7000)}
+            onFacebookLogin={() => this.showAlert("info", "Facebook login clicked!", 7000)}
+            onAppleLogin={() => this.showAlert("info", "Apple login clicked!", 7000)}
           />
         </div>
       </div>

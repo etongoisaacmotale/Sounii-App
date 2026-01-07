@@ -29,7 +29,6 @@ export default class SearchBar extends Component {
           onChange={this.handleChange}
           placeholder="Search for songs, artists, albums..."
         />
-        <button type="submit">Search</button>
       </form>
     );
   }

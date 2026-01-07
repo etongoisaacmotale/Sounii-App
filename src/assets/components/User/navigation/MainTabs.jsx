@@ -20,7 +20,6 @@ class MainTabs extends Component {
       { path: "/library", label: "Library", icon: <FaMusic /> },
       { path: "/community", label: "Community", icon: <FaUsers /> },
       { path: "/events", label: "Events", icon: <FaCalendarAlt /> }, // Changed from Wallet to Events
-      { path: "#more", label: "More", icon: <FaEllipsisH />, action: onMoreClick },
     ];
 
     return (

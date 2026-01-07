@@ -1,20 +1,26 @@
+/* ---------------------------------------------------
+   GENERAL BODY & CONTAINER
+----------------------------------------------------*/
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: #000; /* fully black background */
   color: #fff; /* main text white */
 }
-
+ 
 .profile-container {
   max-width: 900px;
   margin: auto;
   padding: 20px;
 }
-
+ 
 .profile-header h1 {
   color: white;
 }
-
+ 
+/* ---------------------------------------------------
+   PROFILE CARD
+----------------------------------------------------*/
 .profile-card {
   display: flex;
   gap: 30px;
@@ -23,12 +29,12 @@ body {
   border-radius: 10px;
   flex-wrap: wrap;
 }
-
+ 
 .photo-section {
   flex: 1;
   text-align: center;
 }
-
+ 
 .profile-photo {
   width: 150px;
   height: 150px;
@@ -36,7 +42,7 @@ body {
   object-fit: cover;
   border: 3px solid #444;
 }
-
+ 
 .upload-btn {
   display: inline-block;
   margin-top: 10px;
@@ -48,26 +54,26 @@ body {
   color: #fff; /* more visible */
   border: 1px solid #666;
 }
-
+ 
 .upload-btn input {
   display: none;
 }
-
+ 
 .info-section {
   flex: 2;
 }
-
+ 
 .input-group {
   margin-bottom: 20px;
 }
-
+ 
 .input-group label {
   display: block;
   margin-bottom: 6px;
   font-weight: bold;
   color: #ddd;
 }
-
+ 
 .input-group input,
 textarea {
   width: 100%;
@@ -77,12 +83,12 @@ textarea {
   background: #222;
   color: white;
 }
-
+ 
 .button-row {
   display: flex;
   gap: 10px;
 }
-
+ 
 .save-btn {
   background: #0a84ff;
   padding: 10px 16px;
@@ -91,7 +97,7 @@ textarea {
   cursor: pointer;
   color: white;
 }
-
+ 
 .delete-btn {
   background: crimson;
   padding: 10px 16px;
@@ -100,24 +106,27 @@ textarea {
   cursor: pointer;
   color: white;
 }
-
+ 
+/* ---------------------------------------------------
+   SECTIONS
+----------------------------------------------------*/
 .section {
   margin-top: 40px;
   background: #111;
   padding: 20px;
   border-radius: 10px;
 }
-
+ 
 .section h2 {
   color: #fff;
 }
-
+ 
 .list {
   margin: 0;
   padding-left: 20px;
   color: #ccc;
 }
-
+ 
 .logout-btn.logout-bottom {
   width: 100%;
   margin-top: 40px;
@@ -128,24 +137,140 @@ textarea {
   cursor: pointer;
   color: white;
 }
-
-/* RESPONSIVE MOBILE VIEW */
+ 
+/* ---------------------------------------------------
+   RESPONSIVE MOBILE VIEW
+----------------------------------------------------*/
 @media (max-width: 600px) {
   .profile-card {
     flex-direction: column;
     padding: 15px;
   }
-
+ 
   .profile-photo {
     width: 120px;
     height: 120px;
   }
-
+ 
   .button-row {
     flex-direction: column;
   }
-
+ 
   .logout-bottom {
     margin-bottom: 40px;
   }
+}
+ 
+/* ---------------------------------------------------
+   CUSTOM ALERT
+----------------------------------------------------*/
+.custom-alert {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 260px;
+  padding: 14px 18px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  z-index: 1000;
+  animation: slideIn 0.4s ease;
+}
+ 
+.custom-alert .alert-icon {
+  font-size: 18px;
+}
+ 
+.custom-alert .alert-text {
+  font-size: 14px;
+}
+ 
+/* Alert types */
+.custom-alert.success {
+  background: #2db43fbd;
+  color: white;
+}
+ 
+.custom-alert.error {
+  background: crimson;
+  color: white;
+}
+ 
+.custom-alert.info {
+  background: #444;
+  color: white;
+}
+ 
+/* Alert slide-in animation */
+@keyframes slideIn {
+  from {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+ 
+/* ---------------------------------------------------
+   CONFIRM ACTION MODAL (Delete / Logout)
+----------------------------------------------------*/
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1100;
+}
+ 
+.modal-box {
+  background: #111;
+  padding: 24px;
+  border-radius: 10px;
+  max-width: 420px;
+  width: 90%;
+  border: 1px solid #333;
+}
+ 
+.modal-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: white;
+}
+ 
+.modal-text {
+  font-size: 14px;
+  color: #ccc;
+  margin-bottom: 20px;
+}
+ 
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+ 
+.modal-cancel {
+  background: #333;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+ 
+.modal-confirm {
+  background: crimson;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
