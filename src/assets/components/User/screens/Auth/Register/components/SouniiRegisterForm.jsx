@@ -15,6 +15,10 @@ class SouniiRegisterForm extends Component {
     error: "",
     loading: false,
     showMessageBox: false,
+
+    // 👁 password visibility
+    showPassword: false,
+    showConfirmPassword: false,
   };
 
   handleChange = (e) => {
@@ -23,6 +27,18 @@ class SouniiRegisterForm extends Component {
 
   handleCheckboxChange = () => {
     this.setState((prev) => ({ agreed: !prev.agreed }));
+  };
+
+  togglePasswordView = () => {
+    this.setState((prev) => ({
+      showPassword: !prev.showPassword,
+    }));
+  };
+
+  toggleConfirmPasswordView = () => {
+    this.setState((prev) => ({
+      showConfirmPassword: !prev.showConfirmPassword,
+    }));
   };
 
   handleSubmit = (e) => {
@@ -46,7 +62,7 @@ class SouniiRegisterForm extends Component {
 
     this.setState({
       error: "",
-      showMessageBox: true, // ✅ pause here
+      showMessageBox: true,
     });
   };
 
@@ -84,48 +100,104 @@ class SouniiRegisterForm extends Component {
       error,
       loading,
       showMessageBox,
+      showPassword,
+      showConfirmPassword,
     } = this.state;
 
     return (
       <div className="register-form-container">
+        <h1>Create Your Sounii Account</h1>
+
         <form onSubmit={this.handleSubmit}>
-          <SouniiInput name="name" value={name} onChange={this.handleChange} placeholder="Full Name" />
-          <SouniiInput name="email" type="email" value={email} onChange={this.handleChange} placeholder="Email" />
-          <SouniiInput name="phone" type="tel" value={phone} onChange={this.handleChange} placeholder="Phone Number" />
-          <SouniiInput name="password" type="password" value={password} onChange={this.handleChange} placeholder="Password" />
           <SouniiInput
-            name="confirmPassword"
-            type="password"
-            value={confirmPassword}
+            name="name"
+            value={name}
             onChange={this.handleChange}
-            placeholder="Confirm Password"
+            placeholder="Full Name"
           />
+
+          <SouniiInput
+            name="email"
+            type="email"
+            value={email}
+            onChange={this.handleChange}
+            placeholder="Email"
+          />
+
+          <SouniiInput
+            name="phone"
+            type="tel"
+            value={phone}
+            onChange={this.handleChange}
+            placeholder="Phone Number"
+          />
+
+          {/* 🔐 PASSWORD */}
+          <div className="password-field-wrapper">
+            <SouniiInput
+              name="password"
+              type={showPassword ? "text" : "password"}
+              value={password}
+              onChange={this.handleChange}
+              placeholder="Password"
+            />
+            <span
+              className="password-toggle"
+              onClick={this.togglePasswordView}
+            >
+              {showPassword ? "🙈" : "👁️"}
+            </span>
+          </div>
+
+          {/* 🔐 CONFIRM PASSWORD */}
+          <div className="password-field-wrapper">
+            <SouniiInput
+              name="confirmPassword"
+              type={showConfirmPassword ? "text" : "password"}
+              value={confirmPassword}
+              onChange={this.handleChange}
+              placeholder="Confirm Password"
+            />
+            <span
+              className="password-toggle"
+              onClick={this.toggleConfirmPasswordView}
+            >
+              {showConfirmPassword ? "🙈" : "👁️"}
+            </span>
+          </div>
 
           {/* Terms */}
           <div className="terms-checkbox">
-            <input type="checkbox" checked={agreed} onChange={this.handleCheckboxChange} id="terms" />
-            <label htmlFor="terms">I agree to the Sounii Terms & Conditions</label>
+            <input
+              type="checkbox"
+              checked={agreed}
+              onChange={this.handleCheckboxChange}
+              id="terms"
+            />
+            <label htmlFor="terms">
+              I agree to the Sounii Terms & Conditions
+            </label>
           </div>
 
           {error && <p className="error-text">{error}</p>}
 
-          {loading ? (
-            <Loader />
-          ) : (
-            <SouniiButton type="submit" text="Register" />
-          )}
+          {loading ? <Loader /> : <SouniiButton type="submit" text="Register" />}
         </form>
 
         <p className="back-to-login" onClick={this.handleBackToLogin}>
           Back to Login
         </p>
 
-        {/* ✅ MESSAGE BOX */}
+        {/* ✅ CONFIRM MESSAGE BOX */}
         {showMessageBox && (
           <div className="message-box-overlay">
             <div className="message-box">
               <h3>Confirm Registration</h3>
-              <p>Your details look good. Press <strong>Next</strong> to continue.</p>
+              <p>
+                Your details look good.
+                <br />
+                Press <strong>Next</strong> to continue.
+              </p>
               <SouniiButton text="Next" onClick={this.handleNext} />
             </div>
           </div>

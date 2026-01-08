@@ -47,3 +47,10 @@
   text-decoration: underline;
 }
 
+.login-logo {
+  width: 120px;        /* adjust as needed */
+  max-width: 80%;
+  margin: 0 auto 20px;
+  display: block;
+}
+

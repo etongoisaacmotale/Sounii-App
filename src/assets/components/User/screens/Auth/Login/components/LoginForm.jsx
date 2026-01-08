@@ -11,10 +11,17 @@ class LoginForm extends Component {
     loading: false,
     error: "",
     showMessageBox: false,
+    showPassword: false,
   };
 
   handleChange = (field, value) => {
     this.setState({ [field]: value });
+  };
+
+  togglePasswordView = () => {
+    this.setState((prev) => ({
+      showPassword: !prev.showPassword,
+    }));
   };
 
   handleLogin = () => {
@@ -27,7 +34,7 @@ class LoginForm extends Component {
 
     this.setState({
       error: "",
-      showMessageBox: true, // ✅ pause before login
+      showMessageBox: true, // show confirm modal
     });
   };
 
@@ -37,10 +44,12 @@ class LoginForm extends Component {
     this.setState({ loading: true, showMessageBox: false });
 
     try {
-      // ⏳ longer delay for readability
+      // simulate delay
       await new Promise((resolve) => setTimeout(resolve, 3000));
 
-      await this.props.onLogin(emailOrPhone, password);
+      if (this.props.onLogin) {
+        await this.props.onLogin(emailOrPhone, password);
+      }
     } catch (err) {
       this.setState({ error: err.message });
     } finally {
@@ -55,34 +64,45 @@ class LoginForm extends Component {
       loading,
       error,
       showMessageBox,
+      showPassword,
     } = this.state;
 
     return (
       <div className="login-form-container">
-        <h2 className="login-title">Welcome Back to Sounii</h2>
+        <h2 className="login-title">Welcome to Sounii</h2>
 
+        {/* Email / Phone */}
         <SouniiInput
           type="text"
           value={emailOrPhone}
-          onChange={(e) =>
-            this.handleChange("emailOrPhone", e.target.value)
-          }
+          onChange={(e) => this.handleChange("emailOrPhone", e.target.value)}
           placeholder="Email or Phone Number"
         />
 
-        <SouniiInput
-          type="password"
-          value={password}
-          onChange={(e) =>
-            this.handleChange("password", e.target.value)
-          }
-          placeholder="Password"
-        />
+        {/* Password with eye toggle */}
+        <div className="password-field-wrapper">
+          <SouniiInput
+            type={showPassword ? "text" : "password"}
+            value={password}
+            onChange={(e) => this.handleChange("password", e.target.value)}
+            placeholder="Password"
+          />
+          <span
+            className="password-toggle"
+            onClick={this.togglePasswordView}
+          >
+            {showPassword ? "🙈" : "👁️"}
+          </span>
+        </div>
 
+        {/* Error */}
         {error && <p className="error-text">{error}</p>}
 
+        {/* Login button / loader */}
         {loading ? (
-          <div style={{ display: "flex", justifyContent: "center", marginTop: "15px" }}>
+          <div
+            style={{ display: "flex", justifyContent: "center", marginTop: "15px" }}
+          >
             <Loader />
           </div>
         ) : (
@@ -105,7 +125,7 @@ class LoginForm extends Component {
           </span>
         </p>
 
-        {/* ✅ MESSAGE BOX */}
+        {/* Confirm Login Modal */}
         {showMessageBox && (
           <div className="message-box-overlay">
             <div className="message-box">

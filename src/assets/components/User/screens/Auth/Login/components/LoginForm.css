@@ -4,9 +4,9 @@
   color: orange;
   border-radius: 12px;
   padding: 25px 20px;
-  width: 90%;          /* take most of the screen width on small devices */
-  max-width: 350px;    /* restrict max width on larger screens */
-  margin: 40px auto;   /* center horizontally and add vertical spacing */
+  width: 90%;
+  max-width: 350px;
+  margin: 40px auto;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   text-align: center;
   font-family: 'Arial', sans-serif;
@@ -42,11 +42,12 @@
   color: #ff9900;
 }
 
+/* 🔗 Forgot password */
 .forgot-password-link {
   color: #6c63ff;
   font-size: 0.9rem;
-  text-align: right;
-  margin-top: 4px;
+  text-align: center;
+  margin-top: 20px;
   margin-bottom: 12px;
   cursor: pointer;
   transition: color 0.2s ease-in-out;
@@ -57,10 +58,67 @@
   text-decoration: underline;
 }
 
-/* Ensure inputs inside form have spacing and fit smaller screens */
+/* 🔐 Password field wrapper */
+.password-field-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* 👁 Show / Hide password icon */
+.password-toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
+  opacity: 0.7;
+  user-select: none;
+}
+
+.password-toggle:hover {
+  opacity: 1;
+}
+
+/* 🟦 Confirm login message box overlay */
+.message-box-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* 📦 Message box */
+.message-box {
+  background-color: #111;
+  color: #fff;
+  padding: 25px 20px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 320px;
+  text-align: center;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.8);
+}
+
+.message-box h3 {
+  margin-bottom: 10px;
+  color: orange;
+}
+
+.message-box p {
+  font-size: 14px;
+  margin-bottom: 20px;
+  color: #ddd;
+}
+
+/* Ensure inputs inside form have spacing and room for 👁 icon */
 .login-form-container input {
   width: 100%;
   padding: 10px;
+  padding-right: 42px; /* 👁 space */
   margin-bottom: 15px;
   border-radius: 8px;
   border: 1px solid #ccc;

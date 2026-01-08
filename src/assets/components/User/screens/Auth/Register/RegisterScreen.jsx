@@ -4,27 +4,22 @@ import SouniiRegisterForm from "./components/SouniiRegisterForm";
 import SouniiSocialLoginButtons from "../Login/components/SouniiSocialLoginButtons";
 import InlineAlert from "./components/InlineAlerts";
 import { withRouter } from "../../../HOC/withRouter";
+import SouniiLogo from "../../../assets/images/sounii-logo.png";
 
 class RegisterScreen extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      alertType: "",    // "success" | "error" | "info"
-      alertMessage: "", // message to display
-    };
-  }
+  state = {
+    alertType: "",
+    alertMessage: "",
+  };
 
   showAlert = (type, message, duration = 7000) => {
     this.setState({ alertType: type, alertMessage: message });
-    setTimeout(() => {
-      this.setState({ alertMessage: "" });
-    }, duration); // default 7 seconds
+    setTimeout(() => this.setState({ alertMessage: "" }), duration);
   };
 
   handleRegister = (userData) => {
     const { name, email, password } = userData;
 
-    // Validation
     if (!name || !email || !password) {
       this.showAlert("error", "Please fill in all required fields.");
       return;
@@ -41,17 +36,15 @@ class RegisterScreen extends Component {
       return;
     }
 
-    // Success
     this.showAlert("success", `Welcome, ${name}! Your account has been created.`);
 
-    // Navigate after delay
     setTimeout(() => {
-      if (this.props.navigate) this.props.navigate("/login");
+      this.props.navigate("/login");
     }, 1500);
   };
 
   handleBackToLogin = () => {
-    if (this.props.navigate) this.props.navigate("/login");
+    this.props.navigate("/login");
   };
 
   render() {
@@ -59,16 +52,19 @@ class RegisterScreen extends Component {
 
     return (
       <div className="register-screen-container">
-        <h1 className="register-title">Create Your Sounii Account</h1>
+        <img
+          src={SouniiLogo}
+          alt="Sounii"
+          className="login-logo"
+        />
 
-        {/* Inline alert */}
         <InlineAlert type={alertType} message={alertMessage} />
 
         <SouniiRegisterForm
           onRegister={this.handleRegister}
           onBackToLogin={this.handleBackToLogin}
         />
-
+        
         <div className="social-login-wrapper">
           <p className="divider">OR</p>
 

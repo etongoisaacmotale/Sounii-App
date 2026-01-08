@@ -79,6 +79,7 @@ button {
     cursor: pointer;
     font-weight: bold;
     transition: color 0.2s ease;
+    margin-top: 30px;
 }
 
 .back-to-login:hover {
@@ -168,4 +169,11 @@ button {
     button {
         width: 100%;
     }
+}
+
+.login-logo {
+  display: block;
+  margin: 0 auto 1px auto; /* top margin 0, bottom margin 15px */
+  width: 120px;             /* optional, adjust size */
+  height: auto;
 }

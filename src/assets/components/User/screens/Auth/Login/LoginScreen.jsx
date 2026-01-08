@@ -4,6 +4,8 @@ import LoginForm from "./components/LoginForm";
 import SouniiSocialLoginButtons from "./components/SouniiSocialLoginButtons";
 import { withRouter } from "../../../HOC/withRouter";
 import InlineAlert from "./components/InlineAlert";
+import SouniiLogo from "../../../assets/images/sounii-logo.png";
+
 
 class LoginScreen extends Component {
   state = {
@@ -51,7 +53,11 @@ class LoginScreen extends Component {
 
     return (
       <div className="login-screen-container">
-        <h1 className="login-title">Welcome to Sounii</h1>
+        <img
+          src={SouniiLogo}
+          alt="Sounii"
+          className="login-logo"
+        />
 
         {/* Inline alert inside the screen */}
         <InlineAlert type={alertType} message={alertMessage} />
