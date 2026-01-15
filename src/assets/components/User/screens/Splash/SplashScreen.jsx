@@ -1,76 +1,94 @@
 import React, { Component } from "react";
 import { withRouter } from "../../HOC/withRouter";
 import "./SplashScreen.css";
-import SouniiButton from "../../components/SouniiButton";
 import SouniiLogo from "../../assets/images/sounii-logo.png";
 
 class SplashScreen extends Component {
   state = {
-    showLogoOnly: true, // Step 1: only logo
-    progress: 0,
-    loading: false,
-    completed: false,
+    logoCentered: true,   // logo starts center
+    showContent: false,   // content hidden until logo moves
   };
 
   componentDidMount() {
-    // Step 1: Show logo animation for 2 seconds
+    // Phase 1: logo stays centered (2s)
     this.logoTimeout = setTimeout(() => {
-      this.setState({ showLogoOnly: false, loading: true });
-      this.startProgressBar();
+      this.setState({ logoCentered: false });
+
+      // Phase 2: wait for logo to finish moving to top (1s)
+      this.contentTimeout = setTimeout(() => {
+        this.setState({ showContent: true });
+      }, 1000); // match CSS transition duration
     }, 2000);
   }
 
   componentWillUnmount() {
-    clearInterval(this.interval);
     clearTimeout(this.logoTimeout);
+    clearTimeout(this.contentTimeout);
   }
 
-  startProgressBar = () => {
-    // Step 2: Simulate loading progress
-    this.interval = setInterval(() => {
-      this.setState((prev) => {
-        if (prev.progress >= 100) {
-          clearInterval(this.interval);
-          return { progress: 100, loading: false, completed: true };
-        }
-        return { progress: prev.progress + 2 };
-      });
-    }, 50);
-  };
-
-  handleNavigation = () => {
-    // Navigate to login directly
-    this.props.navigate("/login");
+  handleRoleSelect = (role) => {
+    localStorage.setItem("sounii_role", role);
+    if (role === "artist") {
+      this.props.navigate("/artist/register");
+    } else {
+      this.props.navigate("/login");
+    }
   };
 
   render() {
-    const { showLogoOnly, progress, loading, completed } = this.state;
+    const { logoCentered, showContent } = this.state;
 
     return (
       <div className="dynamic-splash-container">
-        {/* Animated logo */}
+        {/* Logo */}
         <img
           src={SouniiLogo}
           alt="Sounii Logo"
-          className={`splash-logo ${showLogoOnly ? "logo-animate" : "logo-small"}`}
+          className={`splash-logo ${logoCentered ? "logo-center" : "logo-top"}`}
         />
 
-        {/* Fade-in content after logo */}
-        {!showLogoOnly && (
-          <div className="splash-content">
-            <h1 className="splash-title">Welcome to Sounii</h1>
-            <p className="splash-subtitle">Discover musical treasures...</p>
+        {/* Content (only shows after logo moves) */}
+        {showContent && (
+          <div className="content-wrapper">
+            <div className="splash-content">
+              <h1 className="splash-title">Welcome to Sounii</h1>
+              <p className="splash-subtitle">
+                Discover, share and monetize music.
+              </p>
 
-            {loading && !completed ? (
-              <div className="loader-bar">
-                <div
-                  className="loader-progress"
-                  style={{ width: `${progress}%` }}
-                />
-              </div>
-            ) : (
-              <SouniiButton text="Get Started" onClick={this.handleNavigation} />
-            )}
+              <section className="about-section">
+                <h2>About Sounii</h2>
+                <p>
+                  Sounii connects artists and listeners through powerful discovery, high-quality streaming, and fair monetization.
+                </p>
+              </section>
+
+              <section className="features-section">
+                <div className="feature-card">🎧 Smart Discovery</div>
+                <div className="feature-card">🚀 Artist Tools</div>
+                <div className="feature-card">💰 Monetization</div>
+              </section>
+
+              <section className="role-section">
+                <h2>Who are you?</h2>
+                <div className="role-cards">
+                  <div
+                    className="role-card"
+                    onClick={() => this.handleRoleSelect("listener")}
+                  >
+                    <h3>🎧 Listener</h3>
+                    <p>Stream and discover music you love.</p>
+                  </div>
+                  <div
+                    className="role-card"
+                    onClick={() => this.handleRoleSelect("artist")}
+                  >
+                    <h3>🎤 Artist</h3>
+                    <p>Upload music and grow your fanbase.</p>
+                  </div>
+                </div>
+              </section>
+            </div>
           </div>
         )}
       </div>

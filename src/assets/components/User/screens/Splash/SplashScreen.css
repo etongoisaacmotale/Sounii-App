@@ -1,38 +1,155 @@
 .dynamic-splash-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
   background: radial-gradient(circle at top, #ff6600 0%, #000 80%);
   color: white;
+  position: relative;
+  overflow-y: auto;
+
+  display: flex;
+  justify-content: flex-start; /* top-aligned for mobile scroll */
+  align-items: center;
   text-align: center;
-  overflow: hidden;
-  animation: fadeIn 1s ease-in;
+
+  padding: 40px 20px 80px; /* extra bottom padding */
 }
 
-/* Logo animation */
+
+/* Logo */
 .splash-logo {
   width: 160px;
   height: auto;
-  transition: all 1s ease;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: all 1s ease-in-out;
+  z-index: 5;
+  pointer-events: none;
 }
 
-.logo-animate {
+.logo-center {
+  top: 50%;
+  transform: translate(-50%, -50%);
   animation: pulse 2s ease-in-out infinite;
 }
 
-.logo-small {
+.logo-top {
+  top: 50px;
   width: 100px;
-  transform: translateY(-20px);
-  transition: all 1s ease-in-out;
+  transform: translateX(-50%);
+  animation: none;
+  z-index: 2;
 }
 
-/* Content fade-in */
+/* Content wrapper */
+.content-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 180px; /* space under top logo */
+  position: relative;
+  z-index: 10; /* above logo */
+}
+
+/* Mobile adjustment */
+@media (max-width: 480px) {
+  .content-wrapper {
+    margin-top: 120px; /* smaller screens */
+  }
+}
+
+/* Main content */
 .splash-content {
-  margin-top: 20px;
+  max-width: 900px;
+  width: 100%;
   opacity: 0;
-  animation: fadeUp 1.2s ease forwards;
+  transform: translateY(20px);
+  animation: fadeUp 1s ease forwards;
+}
+
+/* Titles */
+.splash-title {
+  font-size: 2.2rem;
+  margin-bottom: 8px;
+}
+
+.splash-subtitle {
+  color: #ddd;
+  margin-bottom: 30px;
+}
+
+/* About */
+.about-section {
+  margin-top: 40px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Features */
+.features-section {
+  margin-top: 30px;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.feature-card {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 14px 20px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  backdrop-filter: blur(8px);
+}
+
+/* Role selection */
+.role-section {
+  margin-top: 50px;
+  margin-bottom: 40px;
+}
+
+.role-cards {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.role-card {
+  width: 240px;
+  padding: 24px;
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 102, 0, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.role-card h3 {
+  margin-bottom: 10px;
+}
+
+.role-card p {
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+.role-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: #ff6600;
+  box-shadow: 0 10px 30px rgba(255, 102, 0, 0.3);
+}
+
+/* Animations */
+@keyframes pulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+    opacity: 0.9;
+  }
 }
 
 @keyframes fadeUp {
@@ -40,48 +157,4 @@
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-/* Loader bar (centered perfectly) */
-.loader-bar {
-  width: 80%;
-  max-width: 300px;           /* keeps it nicely sized on wide screens */
-  height: 6px;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 3px;
-  overflow: hidden;
-  margin: 20px auto 0;        /* centers horizontally */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-
-.loader-progress {
-  height: 100%;
-  background: linear-gradient(90deg, #ff6600, #ffcc00);
-  transition: width 0.2s ease;
-}
-
-.splash-title {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 8px;
-}
-
-.splash-subtitle {
-  color: #ddd;
-  font-size: 1rem;
-  margin-bottom: 20px;
-}
-
-/* Animations */
-@keyframes pulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.1); opacity: 0.9; }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
 }
